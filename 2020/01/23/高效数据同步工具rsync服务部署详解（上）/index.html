@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://dreamer1103.github.io').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="高效数据同步工具rsync服务部署详解（上）一、rsync 软件介绍 1 什么是rsync rsync 是一款开源的、快速的、多功能的、可实现全量及增量的本地或远程数据同步备份的优秀工具。 http:&#x2F;&#x2F;www.samba.org&#x2F;ftp&#x2F;rsync&#x2F;rsync.html  全量：将全部数据，进行传输覆盖 增量：只传输差异部分的数据  2 实现增量复制的原理 Rsync通过其独特的“quick c">
+<meta property="og:type" content="article">
+<meta property="og:title" content="高效数据同步工具rsync服务部署详解（上）">
+<meta property="og:url" content="https://dreamer1103.github.io/2020/01/23/%E9%AB%98%E6%95%88%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E5%B7%A5%E5%85%B7rsync%E6%9C%8D%E5%8A%A1%E9%83%A8%E7%BD%B2%E8%AF%A6%E8%A7%A3%EF%BC%88%E4%B8%8A%EF%BC%89/index.html">
+<meta property="og:site_name" content="DREAMER">
+<meta property="og:description" content="高效数据同步工具rsync服务部署详解（上）一、rsync 软件介绍 1 什么是rsync rsync 是一款开源的、快速的、多功能的、可实现全量及增量的本地或远程数据同步备份的优秀工具。 http:&#x2F;&#x2F;www.samba.org&#x2F;ftp&#x2F;rsync&#x2F;rsync.html  全量：将全部数据，进行传输覆盖 增量：只传输差异部分的数据  2 实现增量复制的原理 Rsync通过其独特的“quick c">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-01-23T04:42:21.549Z">
+<meta property="article:modified_time" content="2019-07-23T05:54:07.659Z">
+<meta property="article:author" content="Dreamer">
+<meta property="article:tag" content="技术，极客，数码，硬件">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://dreamer1103.github.io/2020/01/23/%E9%AB%98%E6%95%88%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E5%B7%A5%E5%85%B7rsync%E6%9C%8D%E5%8A%A1%E9%83%A8%E7%BD%B2%E8%AF%A6%E8%A7%A3%EF%BC%88%E4%B8%8A%EF%BC%89/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>高效数据同步工具rsync服务部署详解（上） | DREAMER</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">DREAMER</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">Dreamer Blog</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Navigationsleiste an/ausschalten">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Startseite</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>Über</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Schlagwörter</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Kategorien</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archiv</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-cn">
+    <link itemprop="mainEntityOfPage" href="https://dreamer1103.github.io/2020/01/23/%E9%AB%98%E6%95%88%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E5%B7%A5%E5%85%B7rsync%E6%9C%8D%E5%8A%A1%E9%83%A8%E7%BD%B2%E8%AF%A6%E8%A7%A3%EF%BC%88%E4%B8%8A%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Dreamer">
+      <meta itemprop="description" content="关注一线网络技术">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DREAMER">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          高效数据同步工具rsync服务部署详解（上）
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Veröffentlicht am</span>
+
+              <time title="Erstellt: 2020-01-23 12:42:21" itemprop="dateCreated datePublished" datetime="2020-01-23T12:42:21+08:00">2020-01-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Bearbeitet am</span>
+                <time title="Geändert am: 2019-07-23 13:54:07" itemprop="dateModified" datetime="2019-07-23T13:54:07+08:00">2019-07-23</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="高效数据同步工具rsync服务部署详解（上）"><a href="#高效数据同步工具rsync服务部署详解（上）" class="headerlink" title="高效数据同步工具rsync服务部署详解（上）"></a>高效数据同步工具rsync服务部署详解（上）</h1><p><strong>一、rsync 软件介绍</strong></p>
+<p><strong>1 什么是rsync</strong></p>
+<p>rsync 是一款开源的、快速的、多功能的、可实现全量及增量的本地或远程数据同步备份的优秀工具。</p>
+<p><a href="http://www.samba.org/ftp/rsync/rsync.html" target="_blank" rel="noopener">http://www.samba.org/ftp/rsync/rsync.html</a></p>
+<blockquote>
+<p>全量：将全部数据，进行传输覆盖</p>
+<p>增量：只传输差异部分的数据</p>
+</blockquote>
+<p><strong>2 实现增量复制的原理</strong></p>
+<p>Rsync通过其独特的“quick check”算法，实现增量传输数据</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@backup ~]#man rsyncRsync  finds  files  that  need  to  be transferred using a “quick check” algorithm (by default)  that  looks  for  files  that  have changed  in  size  or  in  last-modified time.  Any changes in the other preserved attributes (as requested by options) are  made  on the  destination file directly when the quick check indicates that the file’s data does not need to be updated.</span><br></pre></td></tr></table></figure>
+
+<p>在同步备份数据时，默认情况下，Rsync通过其独特的“quick check”算法，它仅同步大小或者最后修改时间发生变化的文件或目录，当然也可根据权限，属主等属性的变化同步，但需要指定相应的参数，甚至可以实现只同步一个文件里有变化的内容部分，所以，可以实现快速的同步备份数据。 </p>
+<blockquote>
+<p>centos 5 rsync 2.x 先比对再同步，速度较慢</p>
+<p>centos 6 rsync 3.x 一边比对，一边对差异部分进行同步</p>
+</blockquote>
+<h3 id=""><a href="#" class="headerlink" title=""></a></h3><p>软件版本：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@backup ~]#man rsyncRsync  finds  files  that  need  to  be transferred using a “quick check” algorithm (by default)  that  looks  for  files  that  have changed  in  size  or  in  last-modified time.  Any changes in the other preserved attributes (as requested by options) are  made  on the  destination file directly when the quick check indicates that the file’s data does not need to be updated.</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>3 rsync 软件功能介绍</strong> </p>
+<blockquote>
+<p>类似于 cp 命令 – 实现本地备份传输数据</p>
+<p>类似于scp 命令 – 远程备份传输数据</p>
+<p>类似于 rm 命令 – 实现无差异同步备份</p>
+<p>类似于 ls 命令 – 本地文件信息查看</p>
+</blockquote>
+<p>rsync 命令属于1 v 4 的命令</p>
+<p><strong>3.1 rsync == cp</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@backup ~]# cp -a  /etc/hosts /tmp/[root@backup ~]# ls /tmp/hosts[root@backup ~]# \rm /tmp/hosts[root@backup ~]# rsync  /etc/hosts /tmp/[root@backup ~]# ls /tmp/hosts/tmp/hosts</span><br></pre></td></tr></table></figure>
+
+<p><strong>3.2 rsync == scp</strong></p>
+<p>#使用scp实现</p>
+<p>#检查对端服务器目标位置上是否有该文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@nfs01 ~]# ls /tmp/hostsls: cannot access /tmp/hosts: No such file or directory</span><br></pre></td></tr></table></figure>
+
+<p>#从本地拷贝到远端服务器上</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@backup ~]# ls /tmp/hosts/tmp/hosts[root@backup ~]# scp -rp /etc/hosts 10.0.0.31:/tmp/The authenticity of host '10.0.0.31 (10.0.0.31)' can't be established.RSA key fingerprint is d3:41:bb:0d:43:88:da:a3:2c:e8:36:91:11:c9:e4:9c.Are you sure you want to continue connecting (yes/no)? yesWarning: Permanently added '10.0.0.31' (RSA) to the list of known hosts.root@10.0.0.31's password:hosts                                           100%  357     0.4KB/s   00:00</span><br></pre></td></tr></table></figure>
+
+<p>#检查远端服务器上的结果</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@nfs01 ~]# ls /tmp/hosts/tmp/hosts</span><br></pre></td></tr></table></figure>
+
+<p>#使用rsync 实现</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@backup ~]# rsync -rp /etc/hosts 10.0.0.31:/tmp/root@10.0.0.31's password:[root@backup ~]#[root@nfs01 ~]# ls /tmp/hosts/tmp/hosts</span><br></pre></td></tr></table></figure>
+
+<h3 id="-1"><a href="#-1" class="headerlink" title=""></a></h3><p>3.3 rsync == rm</p>
+<p>环境准备</p>
+<p>创建出来一次命令 进行操作</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@backup tmp]# mkdir /znix[root@backup znix]# cp /tmp/* .[root@backup znix]# lltotal 4-rw-r--r-- 1 root root 357 Oct 11 15:21 hosts</span><br></pre></td></tr></table></figure>
+
+<p>#rm命令操作</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@backup znix]# rm -rf /znix/hosts[root@backup znix]# ll /znix/hostsls: cannot access /znix/hosts: No such file or directory</span><br></pre></td></tr></table></figure>
+
+<p>查看这文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@backup ~]# ltotal 4-rw-r--r-- 1 root root 357 Oct 11 15:21 hosts</span><br></pre></td></tr></table></figure>
+
+<p>创建一个空目录，使用空目录进行无差异同步</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@backup ~]# mkdir /null[root@backup ~]# rsync --delete  /null/ /znix/rsync: --delete does not work without -r or -d.rsync error: syntax or usage error (code 1) at main.c(1422) [client=3.0.6][root@backup ~]# rsync  -a  --delete  /null/ /znix/[root@backup ~]# ll /znix/total 0</span><br></pre></td></tr></table></figure>
+
+<h3 id="-2"><a href="#-2" class="headerlink" title=""></a></h3><p><strong>3.4 rsync == ls -l</strong></p>
+<p>使用rsync 可以实现与 ls 类似的功能</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@backup ~]# ls -l install.log-rw-r--r--. 1 root root 21736 Sep 25 08:38 install.log[root@backup ~]# rsync install.log-rw-r--r--       21736 2017/09/25 08:38:28 install.log</span><br></pre></td></tr></table></figure>
+
+<p><strong>4 Rsync特性总结（特性信息说明）</strong></p>
+<p>\01. 支持拷贝普通文件与特殊文件如链接文件，设备等。</p>
+<p>\02. 可以有排除指定文件或目录同步的功能，相当于打包命令tar的排除功能。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> tar zcvf backup_1.tar.gz  /opt/data  -exclude=oldboy</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>说明：在打包/opt/data时就排除了oldboy命名的目录和文件。</p>
+<p>\03. 可以做到保持原文件或目录的权限、时间、软硬链接、属主、组等所有属性均不改变-p。</p>
+<p>\04. 可实现增量同步，既只同步发生变化的数据，因此数据传输效率很高（tar -N）。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># 将备份&#x2F;home 目录自 2008-01-29 以来修改过的文件# tar -N 2008-01-29 -zcvf &#x2F;backups&#x2F;inc-backup_$(date +%F).tar.gz &#x2F;home# 将备份 &#x2F;home 目录昨天以来修改过的文件# tar -N $(date -d yesterday &quot;+%F&quot;) -zcvf &#x2F;backups&#x2F;inc-backup_$(date +%F).tar.gz &#x2F;home# 添加文件到已经打包的文件# tar -rf all.tar *.gif</span><br></pre></td></tr></table></figure>
+
+<p>说明：这条命令是将所有.gif的文件增加到all.tar的包里面去。-r是表示增加文件的意思。</p>
+<p>\05. 可以使用rcp,rsh,ssh等方式来配合进行隧道加密传输文件（rsync本身不对数据加密）06. 可以通过socket(进程方式)传输文件和数据（服务端和客户端）*****。重点掌握07. 支持匿名的或认证（无需系统用户）的进程模式传输，可实现方便安全的进行数据备份及镜像。</p>
+<p><strong>5 Rsync的企业工作场景说明</strong></p>
+<blockquote>
+<p>\01. 两台服务器之间数据同步（定时任务cron+rsync）</p>
+<p>同步网站内部人员数据信息（定时任务最小周期为1分钟）</p>
+<p>\02. 两台服务器之间数据同步（实时任务inotify/sersync/lrsyncd+rsync）</p>
+<p>同步网站用户人员数据信息</p>
+</blockquote>
+<p><strong>二、rsync使用方式</strong></p>
+<p><strong>1 rsync软件工作方式</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SYNOPSIS        本地数据同步方式       Local:  rsync [OPTION...] SRC... [DEST]        远程数据同步方式       Access via remote shell:         Pull: rsync [OPTION...] [USER@]HOST:SRC... [DEST]         Push: rsync [OPTION...] SRC... [USER@]HOST:DEST        守护进程方式同步数据       Access via rsync daemon:         Pull: rsync [OPTION...] [USER@]HOST::SRC... [DEST]               rsync [OPTION...] rsync://[USER@]HOST[:PORT]/SRC... [DEST]         Push: rsync [OPTION...] SRC... [USER@]HOST::DEST               rsync [OPTION...] SRC... rsync://[USER@]HOST[:PORT]/DEST</span><br></pre></td></tr></table></figure>
+
+<p><strong>1.1 本地数据同步方式（类似于cp）</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Local:  rsync [OPTION...] SRC... [DEST]</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th><strong>参数</strong></th>
+<th><strong>含义</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>rsync</td>
+<td>数据同步命令</td>
+</tr>
+<tr>
+<td>[OPTION…]</td>
+<td>rsync命令参数信息</td>
+</tr>
+<tr>
+<td>SRC</td>
+<td>要同不得数据信息（文件或目录）</td>
+</tr>
+<tr>
+<td>[DEST]</td>
+<td>将数据传输到什么位置</td>
+</tr>
+</tbody></table>
+<p>实例演示命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@backup ~]# rsync  /etc/hosts /tmp/[root@backup ~]# ls /tmp/hosts/tmp/hosts</span><br></pre></td></tr></table></figure>
+
+<p><strong>1.2 远程数据同步方式（类似scp）—又称为隧道传输</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Access via remote shell:  Pull: rsync [OPTION...] [USER@]HOST:SRC... [DEST]  Push: rsync [OPTION...] SRC... [USER@]HOST:DEST</span><br></pre></td></tr></table></figure>
+
+<p>说明：需要进行交互传输数据。如果想实现免交互传输数据，需要借助ssh+key方式实现</p>
+<table>
+<thead>
+<tr>
+<th>pull： 拉：</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>[USER@] ：</td>
+<td>以什么用户身份传输数据信息</td>
+</tr>
+<tr>
+<td>HOST:</td>
+<td>远程主机信息（IP地址信息 主机名称信息）</td>
+</tr>
+<tr>
+<td>SRC:</td>
+<td>远端要恏过来的数据信息</td>
+</tr>
+<tr>
+<td>[dest]</td>
+<td>恏到本地什么位置</td>
+</tr>
+<tr>
+<td>push：推：</td>
+<td></td>
+</tr>
+<tr>
+<td>SRC：</td>
+<td>本地要怼过去的数据信息</td>
+</tr>
+<tr>
+<td>DEST</td>
+<td>怼到远端什么位置</td>
+</tr>
+</tbody></table>
+<p><strong>1.3 【实践操作】pull 拉</strong></p>
+<p>从远端拉文件到当前目录</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@nfs01 ~]# touch /tmp/1.txt[root@backup ~]# rsync nfs01:/tmp/1.txt .root@nfs01's password:[root@backup ~]# lltotal 44-rw-r--r--  1 root root     0 Oct 11 16:16 1.txt</span><br></pre></td></tr></table></figure>
+
+<p><strong>1.4 【实践操作】push 推 （目录）</strong></p>
+<p>将本地的hosts文件推到远端服务器上</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@backup tmp]# lltotal 4-rw-r--r-- 1 root root 357 Oct 11 15:12 hosts</span><br></pre></td></tr></table></figure>
+
+<p>使用push的格式 推整个目录（包括目录）</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@backup tmp]# rsync -r /tmp nfs01:/tmp/root@nfs01's password:[root@nfs01 tmp]# lltotal 4drwxr-xr-x 3 root root 4096 Oct 11 16:20 tmp</span><br></pre></td></tr></table></figure>
+
+<p>推整个目录下的文件（不包括目录本身）</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@backup tmp]# rsync -r /tmp/ nfs01:/tmp/root@nfs01's password:[root@nfs01 tmp]# lltotal 8-rw-r--r-- 1 root root  357 Oct 11 16:21 hostsdrwxr-xr-x 3 root root 4096 Oct 11 16:20 tmp</span><br></pre></td></tr></table></figure>
+
+<p>说明：</p>
+<blockquote>
+<p>/tmp   –表示将tmp目录本身及目录下的内容进行传输</p>
+<p>/tmp/  –表示只传输tmp目录下面的内容信息</p>
+</blockquote>
+<p><strong>2 守护进程方式同步数据</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# uname -aLinux 2.6.32-696.el6.x86_64 #1 SMP Tue Mar 21 19:29:05 UTC 2017 x86_64 x86_64 x86_64 GNU/LinuxAccess via rsync daemon:Pull: rsync [OPTION...] [USER@]HOST::SRC... [DEST]      rsync [OPTION...] rsync://[USER@]HOST[:PORT]/SRC... [DEST]Push: rsync [OPTION...] SRC... [USER@]HOST::DEST      rsync [OPTION...] SRC... rsync://[USER@]HOST[:PORT]/DEST</span><br></pre></td></tr></table></figure>
+
+<p><strong>2.1 配置rsync守护进程方式**</strong>（需要有服务端与客户端）**</p>
+<p>规划：</p>
+<blockquote>
+<p>1、backup服务器作为rsync服务端</p>
+<p>2、以rysnc客户端作为参照物，将数据推到rsync服务器上</p>
+</blockquote>
+<p><strong>2.2 配置rsync服务端**</strong>（将服务端配置<strong>**到 backup 服务器上）</strong></p>
+<p>第一个里程碑： 软件是否存在</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@backup ~]# rpm -qa |grep rsyncrsync-3.0.6-12.el6.x86_64</span><br></pre></td></tr></table></figure>
+
+<p>第二个里程碑： 进行软件服务配置</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@backup ~]# vim /etc/rsyncd.confuid = rsyncgid = rsyncuse chroot = nomax connections = 200timeout = 300pid file = /var/run/rsyncd.pidlock file = /var/run/rsync.locklog file = /var/log/rsyncd.logignore errorsread only = falselist = falsehosts allow = 172.16.1.0/24hosts deny = 0.0.0.0/32auth users = rsync_backupsecrets file = /etc/rsync.password[backup]comment = "backup dir by oldboy"path = /backup</span><br></pre></td></tr></table></figure>
+
+<p>第三个里程：创建rsync用户</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@backup ~]# id rsyncid: rsync: No such user[root@backup ~]# useradd -s /sbin/nologin -M rsync</span><br></pre></td></tr></table></figure>
+
+<p>第四个里程碑： 创建数据备份储存目录,目录修改属主</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@backup ~]# mkdir /backup/[root@backup ~]# chown -R rsync.rsync /backup/</span><br></pre></td></tr></table></figure>
+
+<p>第五个里程碑： 创建认证用户密码文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo "rsync_backup:oldboy123" &gt;&gt;/etc/rsync.passwordchmod 600 /etc/rsync.password</span><br></pre></td></tr></table></figure>
+
+<p>第六个里程碑： 启动rsync服</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rsync --daemon</span><br></pre></td></tr></table></figure>
+
+<p>至此服务端配置完成</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@backup ~]# ps -ef |grep rsyncroot       2076      1  0 17:05 ?        00:00:00 rsync --daemonroot       2163   1817  0 17:38 pts/1    00:00:00 grep --color=auto rsync[root@backup ~]# netstat -lntup |grep rsynctcp        0      0 0.0.0.0:873                 0.0.0.0:*                  LISTEN      2076/rsync         tcp        0      0 :::873                      :::*                        LISTEN      2076/rsync</span><br></pre></td></tr></table></figure>
+
+<p><strong>2.3 配置rsync客户端（其他服务器为客户端）</strong></p>
+<p>第一个里程碑： 软件是否存在</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@nfs01 ~]# rpm -qa |grep rsyncrsync-3.0.6-12.el6.x86_64</span><br></pre></td></tr></table></figure>
+
+<p>第二个里程碑： 创建认证文件</p>
+<p>客户端的认证文件只需要有密码即可</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo "oldboy123" &gt;&gt;/etc/rsync.passwordchmod 600 /etc/rsync.password</span><br></pre></td></tr></table></figure>
+
+<p>第三个里程碑： 实现数据传输</p>
+<p>交互式</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@nfs01 ~]# rsync -avzP /etc/hosts rsync_backup@172.16.1.41::backupPassword:sending incremental file listhosts         357 100%    0.00kB/s    0:00:00 (xfer#1, to-check=0/1) sent 63 bytes  received 33 bytes  9.14 bytes/sectotal size is 357  speedup is 3.72</span><br></pre></td></tr></table></figure>
+
+<p>免交互式</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@nfs01 ~]# rsync -avzP /etc/hosts rsync_backup@172.16.1.41::backup --password-file=/etc/rsync.passwordsending incremental file listhosts         357 100%    0.00kB/s    0:00:00 (xfer#1, to-check=0/1) sent 199 bytes  received 27 bytes  150.67 bytes/sectotal size is 357  speedup is 1.58</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>3 rsync守护进程传输数据原理</strong></p>
+<p><strong>4 rsync 命令同步参数选项&amp;特殊参数</strong></p>
+<table>
+<thead>
+<tr>
+<th>目录参数</th>
+<th>参数说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-v,–verbose</td>
+<td>详细模式输出，传输时的信息</td>
+</tr>
+<tr>
+<td>-z,–compress</td>
+<td>传输时进行压缩以提高传输效率</td>
+</tr>
+<tr>
+<td>–compress-level=NUM 可按级别压缩</td>
+<td></td>
+</tr>
+<tr>
+<td>局域网可以不用压缩</td>
+<td></td>
+</tr>
+<tr>
+<td>-a,–archive （主要）</td>
+<td>归档模式，表示以递归方式传输文件，并保持文件属性。等于-rtopgDl</td>
+</tr>
+<tr>
+<td>-r,–recursive  归档于-a</td>
+<td>对子目录以递归模式，即目录下的所有目录都同样传输。小写r</td>
+</tr>
+<tr>
+<td>-t,–times       归档于-a</td>
+<td>保持文件时间信息</td>
+</tr>
+<tr>
+<td>-o,–owner       归档于-a</td>
+<td>保持文件属主信息</td>
+</tr>
+<tr>
+<td>-p,–perms       归档于-a</td>
+<td>保持文件权限</td>
+</tr>
+<tr>
+<td>-g,–group       归档于-a</td>
+<td>保持文件属组信息</td>
+</tr>
+<tr>
+<td>-P,–progress</td>
+<td>显示同步的过程及传输时的进度等信息（大P）</td>
+</tr>
+<tr>
+<td>-D,–devices    归档于-a</td>
+<td>保持设备文件信息</td>
+</tr>
+<tr>
+<td>-l,–links       归档于-a</td>
+<td>保留软连接（小写字母l）</td>
+</tr>
+<tr>
+<td>-e,–rsh=COMMAND</td>
+<td>使用的信道协议（remote shell），指定替代rsh的shell程序。例如 ssh</td>
+</tr>
+<tr>
+<td>–exclude-from=file</td>
+<td>文件名所在目录文件，即可以实现排除多个文件</td>
+</tr>
+<tr>
+<td>–bwlimit=RATE</td>
+<td>限速功能</td>
+</tr>
+<tr>
+<td>–delete</td>
+<td>让目标目录SRC和源目录数据DST一致，即无差异数据同步</td>
+</tr>
+<tr>
+<td>保持同步目录及文件属性： 这里的-avzP相当于 -vzetopdDlP，生产环境常用的参数为 -avzP 在脚本中可以报-vP去掉 –progress可以用-P代替</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>daemon启动扩展参数</td>
+<td></td>
+</tr>
+<tr>
+<td>–daemon</td>
+<td>daemon表示以守护进程的方式启动rsync服务。</td>
+</tr>
+<tr>
+<td>–address</td>
+<td>绑定指定IP地址提供服务。</td>
+</tr>
+<tr>
+<td>–config=FILE</td>
+<td>更改配置文件路径，而不是默认的/etc/rsyncd.conf</td>
+</tr>
+<tr>
+<td>–port=PORT</td>
+<td>更改其它端口提供服务，而不是缺省的873端口</td>
+</tr>
+</tbody></table>
+<p><strong>4.1 特殊参数实践</strong></p>
+<p>指定ip：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@backup ~]# rsync --daemon --address=172.16.1.41[root@backup ~]# netstat -lntup |grep 873tcp     0   0 172.16.1.41:873     0.0.0.0:*        LISTEN      2583/rsync 参数测试：[root@nfs01 ~]# rsync -avzP /etc/services rsync_backup@172.16.1.41::backup --password-file=/etc/rsync.passwordsending incremental file listservices      641020 100%   19.34MB/s    0:00:00 (xfer#1, to-check=0/1) sent 127417 bytes  received 27 bytes  254888.00 bytes/sectotal size is 641020  speedup is 5.03</span><br></pre></td></tr></table></figure>
+
+<p>指定配置文件路径</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@backup ~]# rsync --daemon --config=/etc/rsyncd.conf[root@nfs01 ~]# rsync -avzP /etc/services rsync_backup@172.16.1.41::backup --password-file=/etc/rsync.passwordsending incremental file listsent 29 bytes  received 8 bytes  74.00 bytes/sectotal size is 641020  speedup is 17324.86</span><br></pre></td></tr></table></figure>
+
+<p>服务端指定服务端口：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@backup ~]# rsync --daemon --port=5222[root@backup ~]# netstat -lntup|grep rsynctcp        0      0 0.0.0.0:5222      0.0.0.0:*           LISTEN      2598/rsync         tcp        0      0 :::5222            :::*                 LISTEN      2598/rsync</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>本文内容来自 老男孩Linux云计算运维优秀学员课后笔记整理</strong></p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/01/23/HTML5%20%E5%85%A5%E9%97%A8%E8%AF%A6%E8%A7%A3/" rel="prev" title="HTML5 入门详解">
+      <i class="fa fa-chevron-left"></i> HTML5 入门详解
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/01/23/%E9%AB%98%E6%95%88%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E5%B7%A5%E5%85%B7rsync%E6%9C%8D%E5%8A%A1%E9%83%A8%E7%BD%B2%E8%AF%A6%E8%A7%A3%EF%BC%88%E4%B8%8B%EF%BC%89/" rel="next" title="高效数据同步工具rsync服务部署详解（下）">
+      高效数据同步工具rsync服务部署详解（下） <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Inhaltsverzeichnis
+        </li>
+        <li class="sidebar-nav-overview">
+          Übersicht
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#高效数据同步工具rsync服务部署详解（上）"><span class="nav-number">1.</span> <span class="nav-text">高效数据同步工具rsync服务部署详解（上）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">1.0.1.</span> <span class="nav-text"></span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#-1"><span class="nav-number">1.0.2.</span> <span class="nav-text"></span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#-2"><span class="nav-number">1.0.3.</span> <span class="nav-text"></span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Dreamer</p>
+  <div class="site-description" itemprop="description">关注一线网络技术</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-name">Artikel</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">Kategorien</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">schlagwörter</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Dreamer</span>
+</div>
+  <div class="powered-by">Erstellt mit  <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Design – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.6.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

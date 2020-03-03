@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://dreamer1103.github.io').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="HCL模拟器设备远程登录方法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HCL模拟器设备远程登录方法">
+<meta property="og:url" content="https://dreamer1103.github.io/2018/12/12/HCL%E6%A8%A1%E6%8B%9F%E5%99%A8%E8%AE%BE%E5%A4%87%E8%BF%9C%E7%A8%8B%E7%99%BB%E5%BD%95%E6%96%B9%E6%B3%95/index.html">
+<meta property="og:site_name" content="DREAMER">
+<meta property="og:description" content="HCL模拟器设备远程登录方法">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/xiangyu1103/picgo/img/miao02.jpg">
+<meta property="article:published_time" content="2018-12-12T14:16:01.000Z">
+<meta property="article:modified_time" content="2019-12-18T08:48:16.207Z">
+<meta property="article:author" content="Dreamer">
+<meta property="article:tag" content="web">
+<meta property="article:tag" content="悦读">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/xiangyu1103/picgo/img/miao02.jpg">
+
+<link rel="canonical" href="https://dreamer1103.github.io/2018/12/12/HCL%E6%A8%A1%E6%8B%9F%E5%99%A8%E8%AE%BE%E5%A4%87%E8%BF%9C%E7%A8%8B%E7%99%BB%E5%BD%95%E6%96%B9%E6%B3%95/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>HCL模拟器设备远程登录方法 | DREAMER</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">DREAMER</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">Dreamer Blog</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Navigationsleiste an/ausschalten">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Startseite</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>Über</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Schlagwörter</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Kategorien</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archiv</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-cn">
+    <link itemprop="mainEntityOfPage" href="https://dreamer1103.github.io/2018/12/12/HCL%E6%A8%A1%E6%8B%9F%E5%99%A8%E8%AE%BE%E5%A4%87%E8%BF%9C%E7%A8%8B%E7%99%BB%E5%BD%95%E6%96%B9%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Dreamer">
+      <meta itemprop="description" content="关注一线网络技术">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DREAMER">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          HCL模拟器设备远程登录方法
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Veröffentlicht am</span>
+
+              <time title="Erstellt: 2018-12-12 22:16:01" itemprop="dateCreated datePublished" datetime="2018-12-12T22:16:01+08:00">2018-12-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Bearbeitet am</span>
+                <time title="Geändert am: 2019-12-18 16:48:16" itemprop="dateModified" datetime="2019-12-18T16:48:16+08:00">2019-12-18</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">in</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">HCL模拟器设备远程登录方法</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+            <img src="https://cdn.jsdelivr.net/gh/xiangyu1103/picgo/img/miao02.jpg" itemprop="contentUrl">
+        </div>
+        <p><img src="https://upload-images.jianshu.io/upload_images/15515702-fc1c24b3029ed414.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="it001.jpg"></p>
+<h3 id="一、设备创建和网卡桥接"><a href="#一、设备创建和网卡桥接" class="headerlink" title="一、设备创建和网卡桥接"></a>一、设备创建和网卡桥接</h3><ul>
+<li>NIC:ip为192.168.56.1/24   设备用户名admin密码123</li>
+</ul>
+<p><img src="https://upload-images.jianshu.io/upload_images/15515702-ab9f31f94eae0fd7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="HCL01.png"></p>
+<h2 id="二、配置管理-ip地址"><a href="#二、配置管理-ip地址" class="headerlink" title="二、配置管理 ip地址"></a>二、配置管理 ip地址</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;H3C&gt;system-view                                                                    #进入系统视图</span><br><span class="line">[H3C]interface Vlan-interface 1                                                     #创建Vlan1管理接口</span><br><span class="line">[H3C-Vlan-interface1]ip address 192.168.56.5 24                                     #配置管理ip地址</span><br><span class="line">[H3C-Vlan-interface1]display this                                                   #查看当前配置</span><br><span class="line">#</span><br><span class="line">interface Vlan-interface1</span><br><span class="line"> ip address 192.168.56.5 255.255.255.0</span><br><span class="line">[H3C-Vlan-interface1]display interface Vlan-interface brief                         #查看端口信息</span><br><span class="line">Brief information on interfaces in route mode:</span><br><span class="line">Link: ADM - administratively down; Stby - standby</span><br><span class="line">Protocol: (s) - spoofing</span><br><span class="line">Interface            Link Protocol Primary IP      Description                </span><br><span class="line">Vlan1                UP   UP       192.168.56.5</span><br></pre></td></tr></table></figure>
+
+<h3 id="三、配置telnet-ssh-https-远程连接服务"><a href="#三、配置telnet-ssh-https-远程连接服务" class="headerlink" title="三、配置telnet ssh https 远程连接服务"></a>三、配置telnet ssh https 远程连接服务</h3><h4 id="①、视图与用户配置"><a href="#①、视图与用户配置" class="headerlink" title="①、视图与用户配置"></a>①、视图与用户配置</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[H3C]user-<span class="class"><span class="keyword">interface</span> <span class="title">vty</span> 0 4                                                         #进入<span class="title">vty</span>用户接口配置视图</span></span><br><span class="line"><span class="class">[<span class="title">H3C</span>-<span class="title">line</span>-<span class="title">vty0</span>-4]<span class="title">authentication</span>-<span class="title">mode</span> <span class="title">scheme</span>                                         #配置登录用户的认证方式为<span class="title">AAA</span>认证</span></span><br><span class="line"><span class="class">[<span class="title">H3C</span>-<span class="title">line</span>-<span class="title">vty0</span>-4]<span class="title">protocol</span> <span class="title">inbound</span> ?                                                 #允许远程用户登录协议</span></span><br><span class="line"><span class="class">  <span class="title">all</span>     <span class="title">All</span> <span class="title">protocols</span></span></span><br><span class="line"><span class="class">  <span class="title">ssh</span>     <span class="title">SSH</span> <span class="title">protocol</span></span></span><br><span class="line"><span class="class">  <span class="title">telnet</span>  <span class="title">Telnet</span> <span class="title">protocol</span></span></span><br><span class="line"><span class="class">[<span class="title">H3C</span>-<span class="title">line</span>-<span class="title">vty0</span>-4]<span class="title">protocol</span> <span class="title">inbound</span> <span class="title">all</span>                     </span></span><br><span class="line"><span class="class">[<span class="title">H3C</span>-<span class="title">line</span>-<span class="title">vty0</span>-4]<span class="title">user</span>-<span class="title">role</span> <span class="title">network</span>-<span class="title">admin</span>                                            #配置用户角色权限级别</span></span><br><span class="line"><span class="class">[<span class="title">H3C</span>-<span class="title">line</span>-<span class="title">vty0</span>-4]<span class="title">user</span>-<span class="title">role</span> <span class="title">level</span>-15                                                 # 配置用户界面角色级别</span></span><br><span class="line"><span class="class">[<span class="title">H3C</span>-<span class="title">line</span>-<span class="title">vty0</span>-4]<span class="title">quit</span></span></span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[H3C]local-user admin                                                               # 进入本地用户配置界面</span><br><span class="line">[H3C-luser-manage-admin]password simple 123                                         # 配置用户密码</span><br><span class="line">[H3C-luser-manage-admin]service-type ?                                              #本地用户登录服务类型</span><br><span class="line">  ftp       FTP service</span><br><span class="line">  http      HTTP service type</span><br><span class="line">  https     HTTPS service type</span><br><span class="line">  pad       X.25 PAD service</span><br><span class="line">  ssh       Secure Shell service</span><br><span class="line">  telnet    Telnet service</span><br><span class="line">  terminal  Terminal access service</span><br><span class="line">[H3C-luser-manage-admin]service-type telnet ssh https</span><br><span class="line">[H3C-luser-manage-admin]authorization-attribute user-role network-admin  </span><br><span class="line">[H3C-luser-manage-admin]authorization-attribute user-role level-15                  #配置用户角色级别</span><br><span class="line">[H3C-luser-manage-admin]quit</span><br></pre></td></tr></table></figure>
+
+<h4 id="②、开启服务"><a href="#②、开启服务" class="headerlink" title="②、开启服务"></a>②、开启服务</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[H3C]telnet server enable                                # 开启telnet服务</span><br><span class="line">[H3C]ip https enable                                     # 开启https服务</span><br><span class="line"> #开启ssh服务前生成本地密钥对</span><br><span class="line">[H3C]<span class="keyword">public</span>-key local create dsa                         # 生成本地用户DSA</span><br><span class="line">[H3C]<span class="keyword">public</span>-key local create rsa                         # 生成本地用户RSA</span><br><span class="line">[H3C]ssh server enable                                   # 开启ssh服务</span><br></pre></td></tr></table></figure>
+
+<h4 id="③、测试远程连接"><a href="#③、测试远程连接" class="headerlink" title="③、测试远程连接"></a>③、测试远程连接</h4><p><img src="https://upload-images.jianshu.io/upload_images/15515702-7b7b20cdfbfa98e7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="login.png"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/15515702-80d149366008d5a4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="https.png"></p>
+<h3 id="登录成功！！！end"><a href="#登录成功！！！end" class="headerlink" title="登录成功！！！end"></a>登录成功！！！end</h3><hr>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/web/" rel="tag"># web</a>
+              <a href="/tags/%E6%82%A6%E8%AF%BB/" rel="tag"># 悦读</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/12/12/Hexo-Theme-Sakura/" rel="prev" title="Hexo-Theme-Sakura">
+      <i class="fa fa-chevron-left"></i> Hexo-Theme-Sakura
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/01/01/tomcat%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B/" rel="next" title="tomcat基础">
+      tomcat基础 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Inhaltsverzeichnis
+        </li>
+        <li class="sidebar-nav-overview">
+          Übersicht
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、设备创建和网卡桥接"><span class="nav-number">1.</span> <span class="nav-text">一、设备创建和网卡桥接</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、配置管理-ip地址"><span class="nav-number"></span> <span class="nav-text">二、配置管理 ip地址</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#三、配置telnet-ssh-https-远程连接服务"><span class="nav-number">1.</span> <span class="nav-text">三、配置telnet ssh https 远程连接服务</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#①、视图与用户配置"><span class="nav-number">1.1.</span> <span class="nav-text">①、视图与用户配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#②、开启服务"><span class="nav-number">1.2.</span> <span class="nav-text">②、开启服务</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#③、测试远程连接"><span class="nav-number">1.3.</span> <span class="nav-text">③、测试远程连接</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#登录成功！！！end"><span class="nav-number">2.</span> <span class="nav-text">登录成功！！！end</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Dreamer</p>
+  <div class="site-description" itemprop="description">关注一线网络技术</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-name">Artikel</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">Kategorien</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">schlagwörter</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Dreamer</span>
+</div>
+  <div class="powered-by">Erstellt mit  <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Design – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.6.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
