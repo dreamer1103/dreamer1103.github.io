@@ -18,7 +18,7 @@
 
   <!-- 页面元数据 -->
   
-    <title>分类：mysql - DREAMER</title>
+    <title>标签：web , 悦读 - DREAMER</title>
   
   
 
@@ -322,8 +322,8 @@
       
         
   <h2 class="title">
-    <a href="/2018/12/11/Linux%E5%AE%9A%E6%97%B6%E5%A4%87%E4%BB%BDMySQL%E6%95%B0%E6%8D%AE%E5%BA%93/">
-      Linux定时备份MySQL数据库
+    <a href="/2018/12/12/Hexo-Theme-Sakura/">
+      Hexo-Theme-Sakura
     </a>
   </h2>
 
@@ -348,7 +348,7 @@
             <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-edit" aria-hidden="true"></i>
-    <p>发布于：2018年12月11日</p>
+    <p>发布于：2018年12月12日</p>
   </a>
 </div>
 
@@ -358,9 +358,9 @@
             
   
   <div class='new-meta-item category'>
-    <a href='/categories/mysql/' rel="nofollow">
+    <a href='/categories/%E6%8A%80%E6%9C%AF/' rel="nofollow">
       <i class="fas fa-folder-open" aria-hidden="true"></i>
-      <p>mysql</p>
+      <p>技术</p>
     </a>
   </div>
 
@@ -382,7 +382,7 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      Linux定时备份MySQL数据库
+      hexo-sakura主题使用教程
       
         
 
@@ -392,7 +392,7 @@
     <!-- 
       <div class="full-width auto-padding tags">
         
-          <a href="/tags/mysql-linux/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> mysql , linux</a>
+          <a href="/tags/web-%E6%82%A6%E8%AF%BB/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> web , 悦读</a>
         
       </div>
      -->
@@ -415,7 +415,6 @@
 
     
   
-
 </div>
 <aside class='l_side'>
   
@@ -649,6 +648,61 @@
 
 <script>setLoadingBarProgress(80);</script>
 
+<style type="text/css">
+    #category-radar {
+        width: 100%;
+        height: 360px;
+    }
+</style>
+
+<div class="container" data-aos="fade-up">
+    <div class="card">
+        <div id="category-radar" class="card-content"></div>
+    </div>
+</div>
+
+<script type="text/javascript" src="/js/echarts.min.js"></script>
+<script type="text/javascript">
+    let radarChart = echarts.init(document.getElementById('category-radar'));
+
+    
+
+    let option = {
+        title: {
+            left: 'center',
+            text: 'categoryRadarTitle',
+            textStyle: {
+                fontWeight: 500,
+                fontSize: 22
+            }
+        },
+        tooltip: {},
+        radar: {
+            name: {
+                textStyle: {
+                    color: '#3C4858'
+                }
+            },
+            indicator: [{"name":"Linux","max":2},{"name":"技术","max":2},{"name":"nginx","max":2},{"name":"mysql","max":2}],
+            nameGap: 5,
+            center: ['50%','55%'],
+            radius: '66%'
+        },
+        series: [{
+            type: 'radar',
+            color: ['#3ecf8e'],
+            itemStyle: {normal: {areaStyle: {type: 'default'}}},
+            data : [
+                {
+                    value : [1,1,1,1],
+                    name : 'categoryNumber'
+                }
+            ]
+        }]
+    };
+
+    radarChart.setOption(option);
+</script>
 
       <script>setLoadingBarProgress(60);</script>
     </div>
