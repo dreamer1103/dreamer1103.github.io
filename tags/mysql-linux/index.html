@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<head hexo-theme='https://volantis.js.org/#2.0.2'>
+<head hexo-theme='https://volantis.js.org/#2.1.2'>
   <meta charset="utf-8">
   <!-- SEO相关 -->
   
@@ -91,7 +91,7 @@
           
           
           
-            DREAMER <b><sup style='color:#3AA757'>2.0.2</sup></b>
+            DREAMER <b><sup style='color:#3AA757'>2.1.2</sup></b>
           
         </a>
       
@@ -123,17 +123,95 @@
             
             
               <li>
-                <a class="flat-box" href=/categories
+                <a class="flat-box" 
                   
                   
-                  
-                    id="categories"
                   >
                   
                     <i class='fas fa-list-alt fa-fw fa-fw'></i>
                   
                   索引
                 </a>
+                
+                  <ul class="submenu">
+                    
+                      
+            
+              <li>
+                <a class="flat-box" href=/categories/
+                  
+                  
+                  
+                    id="categories"
+                  >
+                  
+                    <i class='fas fa-folder-open fa-fw'></i>
+                  
+                  文章分类
+                </a>
+                
+              </li>
+            
+          
+                    
+                      
+            
+              <li>
+                <a class="flat-box" href=/tags/
+                  
+                  
+                  
+                    id="tags"
+                  >
+                  
+                    <i class='fas fa-tags fa-fw'></i>
+                  
+                  所有标签
+                </a>
+                
+              </li>
+            
+          
+                    
+                      
+            
+              <li>
+                <a class="flat-box" href=/archives/
+                  
+                  
+                  
+                    id="archives"
+                  >
+                  
+                    <i class='fas fa-archive fa-fw'></i>
+                  
+                  时光轴
+                </a>
+                
+              </li>
+            
+          
+                    
+                      
+            
+              <li>
+                <a class="flat-box" href=/friends/
+                  
+                  
+                  
+                    id="friends"
+                  >
+                  
+                    <i class='fas fa-link fa-fw'></i>
+                  
+                  友链
+                </a>
+                
+              </li>
+            
+          
+                    
+                  </ul>
                 
               </li>
             
@@ -142,11 +220,11 @@
             
             
               <li>
-                <a class="flat-box" href=/tags
+                <a class="flat-box" href=/Collect
                   
                   
                   
-                    id="tags"
+                    id="Collect"
                   >
                   
                     <i class='fas fa-laptop-code fa-fw fa-fw'></i>
@@ -172,6 +250,29 @@
                   
                   关于
                 </a>
+                
+                  <ul class="submenu">
+                    
+                      
+            
+              <li>
+                <a class="flat-box" href=http://reusme.dreamer1103.tk/
+                  
+                  
+                  
+                    id="http:reusme.dreamer1103.tk"
+                  >
+                  
+                    <i class='fas fa-folder-open fa-fw'></i>
+                  
+                  个人简历
+                </a>
+                
+              </li>
+            
+          
+                    
+                  </ul>
                 
               </li>
             
@@ -216,7 +317,7 @@
     </li>
   
     <li>
-      <a class="flat-box" href=/categories
+      <a class="flat-box" href=/categories/
         
         
         
@@ -345,6 +446,19 @@
           
         
           
+            
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/mysql/' rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>mysql</p>
+    </a>
+  </div>
+
+
+          
+        
+          
             <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-edit" aria-hidden="true"></i>
@@ -356,14 +470,6 @@
         
           
             
-  
-  <div class='new-meta-item category'>
-    <a href='/categories/mysql/' rel="nofollow">
-      <i class="fas fa-folder-open" aria-hidden="true"></i>
-      <p>mysql</p>
-    </a>
-  </div>
-
 
           
         
@@ -385,17 +491,14 @@
       Linux定时备份MySQL数据库
       
         
-
+          <div class="button readmore">
+            <a href="/2018/12/11/Linux%E5%AE%9A%E6%97%B6%E5%A4%87%E4%BB%BDMySQL%E6%95%B0%E6%8D%AE%E5%BA%93/">
+              Read More <i class="fas fa-chevron-right"></i>
+            </a>
+          </div>
         
       
     </div>
-    <!-- 
-      <div class="full-width auto-padding tags">
-        
-          <a href="/tags/mysql-linux/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> mysql , linux</a>
-        
-      </div>
-     -->
   </section>
 </article>
 
@@ -490,7 +593,7 @@
     
   <header>
     
-      <a href='/blog/categories/'><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i><span class='name'>文章分类</span></a>
+      <a href='/categories/'><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i><span class='name'>文章分类</span></a>
     
   </header>
 
@@ -518,6 +621,11 @@
             id="categoriesE68A80E69CAF"
             ><div class='name'>技术</div><div class='badge'>(1)</div></a></li>
         
+          <li><a class="flat-box"
+            title="/categories/%E9%9A%8F%E7%AC%94/" href="/categories/%E9%9A%8F%E7%AC%94/"
+            id="categoriesE99A8FE7AC94"
+            ><div class='name'>随笔</div><div class='badge'>(1)</div></a></li>
+        
       </ul>
     </div>
   </section>
@@ -534,18 +642,41 @@
     
   <header>
     
-      <a href='/blog/tags/'><i class="fas fa-tags fa-fw" aria-hidden="true"></i><span class='name'>热门标签</span></a>
+      <a href='/tags/'><i class="fas fa-tags fa-fw" aria-hidden="true"></i><span class='name'>热门标签</span></a>
     
   </header>
 
 
     <div class='content'>
-      <a href="/tags/linux/" style="font-size: 14px; color: #999">linux</a> <a href="/tags/mysql-linux/" style="font-size: 14px; color: #999">mysql , linux</a> <a href="/tags/nginx/" style="font-size: 14px; color: #999">nginx</a> <a href="/tags/web-%E6%82%A6%E8%AF%BB/" style="font-size: 14px; color: #999">web , 悦读</a>
+      <a href="/tags/linux/" style="font-size: 14px; color: #999">linux</a> <a href="/tags/mysql-linux/" style="font-size: 14px; color: #999">mysql , linux</a> <a href="/tags/nginx/" style="font-size: 14px; color: #999">nginx</a> <a href="/tags/web-%E6%82%A6%E8%AF%BB/" style="font-size: 14px; color: #999">web , 悦读</a> <a href="/tags/%E9%9A%8F%E7%AC%94/" style="font-size: 14px; color: #999">随笔</a>
     </div>
   </section>
 
 
   
+
+  
+    
+    
+
+<section class="widget qrcode shadow desktop">
+  
+  <header>
+    
+      <i class="fas fa-mobile fa-fw" aria-hidden="true"></i><span class='name'>手机观看</span>
+    
+  </header>
+
+
+  <div class='content article-entry'>
+    
+      
+        <img src='https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/qrcode/wiki_volantis.png'
+        >
+      
+    
+  </div>
+</section>
 
   
 
@@ -627,7 +758,7 @@
     
       
         本站使用
-        <a href="https://volantis.js.org/" target="_blank" class="codename">Dreamer</a>
+        <a href="https://www.dreamer1103.tk/" target="_blank" class="codename">Dreamer</a>
         作为主题
         
           ，
@@ -648,68 +779,13 @@
 
 <script>setLoadingBarProgress(80);</script>
 
-<style type="text/css">
-    #category-radar {
-        width: 100%;
-        height: 360px;
-    }
-</style>
-
-<div class="container" data-aos="fade-up">
-    <div class="card">
-        <div id="category-radar" class="card-content"></div>
-    </div>
-</div>
-
-<script type="text/javascript" src="/js/echarts.min.js"></script>
-<script type="text/javascript">
-    let radarChart = echarts.init(document.getElementById('category-radar'));
-
-    
-
-    let option = {
-        title: {
-            left: 'center',
-            text: 'categoryRadarTitle',
-            textStyle: {
-                fontWeight: 500,
-                fontSize: 22
-            }
-        },
-        tooltip: {},
-        radar: {
-            name: {
-                textStyle: {
-                    color: '#3C4858'
-                }
-            },
-            indicator: [{"name":"Linux","max":2},{"name":"技术","max":2},{"name":"nginx","max":2},{"name":"mysql","max":2}],
-            nameGap: 5,
-            center: ['50%','55%'],
-            radius: '66%'
-        },
-        series: [{
-            type: 'radar',
-            color: ['#3ecf8e'],
-            itemStyle: {normal: {areaStyle: {type: 'default'}}},
-            data : [
-                {
-                    value : [1,1,1,1],
-                    name : 'categoryNumber'
-                }
-            ]
-        }]
-    };
-
-    radarChart.setOption(option);
-</script>
 
       <script>setLoadingBarProgress(60);</script>
     </div>
     <a class="s-top fas fa-arrow-up fa-fw" href='javascript:void(0)'></a>
   </div>
   
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.3/dist/jquery.min.js"></script>
 
 
   <script>
@@ -720,7 +796,7 @@
   </script>
 
 
-  <script async src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2.0.2.4/js/instant_page.js" type="module" defer integrity="sha384-OeDn4XE77tdHo8pGtE1apMPmAipjoxUQ++eeJa6EtJCfHlvijigWiJpD7VDPWXV1"></script>
+  <script async src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2/js/instant_page.js" type="module" defer integrity="sha384-OeDn4XE77tdHo8pGtE1apMPmAipjoxUQ++eeJa6EtJCfHlvijigWiJpD7VDPWXV1"></script>
 
 
 
@@ -752,16 +828,30 @@
 
     <script type="text/javascript">
       $(function(){
+        var imgs=["https://cdn.jsdelivr.net/gh/xaoxuu/cdn-wallpaper/abstract/41F215B9-261F-48B4-80B5-4E86E165259E.jpeg"];
+        if ('true' == 'true') {
+          function shuffle(arr){
+            /*From countercurrent-time*/
+            var n = arr.length;
+            while(n--) {
+              var index = Math.floor(Math.random() * n);
+              var temp = arr[index];
+              arr[index] = arr[n];
+              arr[n] = temp;
+            }
+          }
+          shuffle(imgs);
+        }
         if ('.cover') {
           $('.cover').backstretch(
-          ["https://cdn.jsdelivr.net/gh/xaoxuu/cdn-wallpaper/abstract/41F215B9-261F-48B4-80B5-4E86E165259E.jpeg"],
+            imgs,
           {
             duration: "20000",
             fade: "1500"
           });
         } else {
           $.backstretch(
-          ["https://cdn.jsdelivr.net/gh/xaoxuu/cdn-wallpaper/abstract/41F215B9-261F-48B4-80B5-4E86E165259E.jpeg"],
+            imgs,
           {
             duration: "20000",
             fade: "1500"
@@ -798,12 +888,12 @@
 
 
   
-<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2.0.2.4/js/search.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2.1/js/search.js"></script>
 
 
 
   
-<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2.0.2.4/js/comment_typing.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2/js/comment_typing.js"></script>
 
 
 
@@ -811,11 +901,13 @@
 
   <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
 <script>
-  let COPY_SUCCESS = "复制成功";
-  let COPY_FAILURE = "复制失败";
   /*页面载入完成后，创建复制按钮*/
   !function (e, t, a) {
     /* code */
+    function on_success(){
+      let $btn = $('.highlight .code pre');
+      console.log($btn);
+    }
     var initCopyCode = function(){
       var copyHtml = '';
       copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
@@ -827,69 +919,28 @@
           return trigger.nextElementSibling;
         }
       });
-
       clipboard.on('success', function(e) {
-        //您可以加入成功提示
-        console.info('Action:', e.action);
-        console.info('Text:', e.text);
-        console.info('Trigger:', e.trigger);
-        success_prompt(COPY_SUCCESS);
-        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copyed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('fa-copy');
+        $icon.addClass('fa-clipboard-check');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPYED';
       });
       clipboard.on('error', function(e) {
-        //您可以加入失败提示
-        console.error('Action:', e.action);
-        console.error('Trigger:', e.trigger);
-        fail_prompt(COPY_FAILURE);
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('fa-copy');
+        $icon.addClass('fa-exclamation-triangle');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
       });
     }
     initCopyCode();
-
   }(window, document);
-
-  /**
-   * 弹出式提示框，默认1.5秒自动消失
-   * @param message 提示信息
-   * @param style 提示样式，有alert-success、alert-danger、alert-warning、alert-info
-   * @param time 消失时间
-   */
-  var prompt = function (message, style, time)
-  {
-      style = (style === undefined) ? 'alert-success' : style;
-      time = (time === undefined) ? 1500 : time*1000;
-      $('<div>')
-          .appendTo('body')
-          .addClass('alert ' + style)
-          .html(message)
-          .show()
-          .delay(time)
-          .fadeOut();
-  };
-
-  // 成功提示
-  var success_prompt = function(message, time)
-  {
-      prompt(message, 'alert-success', time);
-  };
-
-  // 失败提示
-  var fail_prompt = function(message, time)
-  {
-      prompt(message, 'alert-danger', time);
-  };
-
-  // 提醒
-  var warning_prompt = function(message, time)
-  {
-      prompt(message, 'alert-warning', time);
-  };
-
-  // 信息提示
-  var info_prompt = function(message, time)
-  {
-      prompt(message, 'alert-info', time);
-  };
-
 </script>
 
 
