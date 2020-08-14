@@ -146,6 +146,16 @@
           
             <li>
               <a class="nav home "
+                href="https://blog.dreamer.ga/docsify/#/"
+                
+                
+                id="https:blog.dreamer.gadocsify#">
+                <i class='fas fa-book fa-fw fa-fw'></i>&nbsp;文档
+              </a>
+            </li>
+          
+            <li>
+              <a class="nav home "
                 href="/about"
                 
                 
@@ -468,6 +478,20 @@
     </li>
   
     <li>
+      <a class="flat-box" href=https://blog.dreamer.ga/docsify/#/
+        
+        
+        
+          id="https:blog.dreamer.gadocsify#"
+        >
+        
+          <i class='fas fa-book fa-fw fa-fw'></i>
+        
+        文档
+      </a>
+    </li>
+  
+    <li>
       <a class="flat-box" href=/about/
         
         
@@ -585,9 +609,206 @@
         
           
         
+          
+        
+          
+        
       
     
     
+      
+        
+          <div class='post-wrapper'>
+            <article class="post white-box shadow reveal ">
+  
+
+
+  <section class='meta'>
+    
+    
+    <div class="meta" id="header-meta">
+      
+        
+  <h2 class="title">
+    <a href="/2020/04/22/centos7.7%E5%AE%89%E8%A3%85bind-9.11.4/">
+      Centos7.7安装bind-9.11.4
+    </a>
+  </h2>
+
+
+      
+      <div class='new-meta-box'>
+        
+          
+        
+          
+            
+<div class='new-meta-item author'>
+  <a href="http://www.dreamer1103.tk" target="_blank" rel="nofollow noopener">
+    <img src="https://cdn.jsdelivr.net/gh/xiangyu1103/picgo/img/touxiang02.jpg">
+    <p>Dreamer</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/linux/' rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>linux</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-edit" aria-hidden="true"></i>
+    <p>发布于：2020年4月22日</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      <img src="http://img.ymw.cn/52017121314000f821e4f.jpg" alt="avatar" style="zoom:150%;" />
+      
+        
+          <div class="button readmore">
+            <a href="/2020/04/22/centos7.7%E5%AE%89%E8%A3%85bind-9.11.4/">
+              Read More <i class="fas fa-chevron-right"></i>
+            </a>
+          </div>
+        
+      
+    </div>
+  </section>
+</article>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <article class="post white-box shadow reveal ">
+  
+
+
+  <section class='meta'>
+    
+    
+    <div class="meta" id="header-meta">
+      
+        
+  <h2 class="title">
+    <a href="/2020/04/21/Centos7%20%E4%BF%AE%E6%94%B9%E7%BD%91%E5%8D%A1%E4%B8%BAeth0/">
+      Centos7 修改网卡为eth0
+    </a>
+  </h2>
+
+
+      
+      <div class='new-meta-box'>
+        
+          
+        
+          
+            
+<div class='new-meta-item author'>
+  <a href="http://www.dreamer1103.tk" target="_blank" rel="nofollow noopener">
+    <img src="https://cdn.jsdelivr.net/gh/xiangyu1103/picgo/img/touxiang02.jpg">
+    <p>Dreamer</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/linux/' rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>linux</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-edit" aria-hidden="true"></i>
+    <p>发布于：2020年4月21日</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      <p>默认centos7安装不设置内核版本，会影响网卡的名称。所以为了我们统一管理我们需要将网卡名称修改为eth开头</p>
+<h3 id="第一步查看服务器版本"><a href="#第一步查看服务器版本" class="headerlink" title="第一步查看服务器版本"></a>第一步查看服务器版本</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# cat &#x2F;etc&#x2F;redhat-release</span><br><span class="line">CentOS Linux release 7.6.1810 (Core)</span><br></pre></td></tr></table></figure>
+
+<h3 id="第二步查看当前网卡名称"><a href="#第二步查看当前网卡名称" class="headerlink" title="第二步查看当前网卡名称"></a>第二步查看当前网卡名称</h3><p>我们可以看到当前网卡名称都是en0开头的，不方便我们集中管理</p>
+      
+        
+          <div class="button readmore">
+            <a href="/2020/04/21/Centos7%20%E4%BF%AE%E6%94%B9%E7%BD%91%E5%8D%A1%E4%B8%BAeth0/">
+              Read More <i class="fas fa-chevron-right"></i>
+            </a>
+          </div>
+        
+      
+    </div>
+  </section>
+</article>
+
+          </div>
+        
       
         
           <div class='post-wrapper'>
@@ -1427,222 +1648,6 @@
           </div>
         
       
-        
-          <div class='post-wrapper'>
-            <article class="post white-box shadow reveal ">
-  
-
-
-  <section class='meta'>
-    
-      
-
-  
-    <meting-js
-      mini='true'
-      autoplay='false'
-      volume='0.7'
-      loop='all'
-      order='list'
-      server='tencent'
-      type='song'
-      id='003et2lV2tX3b8'>
-    </meting-js>
-  
-
-
-    
-    
-    <div class="meta" id="header-meta">
-      
-        
-  <h2 class="title">
-    <a href="/2019/10/02/%E7%AE%80%E5%8D%95%E4%BA%86%E8%A7%A3%E4%B8%8BPython%E5%86%85%E7%BD%AE%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%E7%9A%84%E6%80%A7%E8%83%BD/">
-      简单感受下Python内置数据类型常用操作的性能
-    </a>
-  </h2>
-
-
-      
-      <div class='new-meta-box'>
-        
-          
-        
-          
-            
-<div class='new-meta-item author'>
-  <a href="http://www.dreamer1103.tk" target="_blank" rel="nofollow noopener">
-    <img src="https://cdn.jsdelivr.net/gh/xiangyu1103/picgo/img/touxiang02.jpg">
-    <p>Dreamer</p>
-  </a>
-</div>
-
-          
-        
-          
-            
-  
-  <div class='new-meta-item category'>
-    <a href='/categories/Python/' rel="nofollow">
-      <i class="fas fa-folder-open" aria-hidden="true"></i>
-      <p>Python</p>
-    </a>
-  </div>
-
-
-          
-        
-          
-            <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-edit" aria-hidden="true"></i>
-    <p>发布于：2019年10月2日</p>
-  </a>
-</div>
-
-          
-        
-          
-            
-
-          
-        
-          
-            
-
-          
-        
-      </div>
-      
-        <hr>
-      
-    </div>
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      <h1 id="生成一个列表的几种方式的性能对比"><a href="#生成一个列表的几种方式的性能对比" class="headerlink" title="生成一个列表的几种方式的性能对比"></a>生成一个列表的几种方式的性能对比</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> timeit <span class="keyword">import</span> Timer</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 列表常用操作性能测试</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 迭代 + '+'</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test1</span><span class="params">()</span>:</span></span><br><span class="line">    l = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1000</span>):</span><br><span class="line">        l = l + [i]</span><br><span class="line">    </span><br><span class="line"></span><br><span class="line"><span class="comment"># 迭代 + append</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test2</span><span class="params">()</span>:</span></span><br><span class="line">    l = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1000</span>):</span><br><span class="line">        l.append(i)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 列表生成式</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test3</span><span class="params">()</span>:</span></span><br><span class="line">    l = [i <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1000</span>)]</span><br><span class="line"></span><br><span class="line"><span class="comment"># list构造函数 + range</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test4</span><span class="params">()</span>:</span></span><br><span class="line">    l = list(range(<span class="number">1000</span>))</span><br><span class="line"></span><br><span class="line">t1 = Timer(<span class="string">"test1()"</span>, <span class="string">"from __main__ import test1"</span>)</span><br><span class="line"><span class="comment"># print("concat %f seconds" % t1.timeit(number=1000))</span></span><br><span class="line"></span><br><span class="line">t2 = Timer(<span class="string">"test2()"</span>, <span class="string">"from __main__ import test2"</span>)</span><br><span class="line"><span class="comment"># print("concat %f seconds" % t2.timeit(number=1000))</span></span><br><span class="line"></span><br><span class="line">t3 = Timer(<span class="string">"test3()"</span>, <span class="string">"from __main__ import test3"</span>)</span><br><span class="line"><span class="comment"># print("concat %f seconds" % t3.timeit(number=1000))</span></span><br><span class="line"></span><br><span class="line">t4 = Timer(<span class="string">"test4()"</span>, <span class="string">"from __main__ import test4"</span>)</span><br><span class="line"><span class="comment"># print("concat %f seconds" % t4.timeit(number=1000))</span></span><br><span class="line"></span><br><span class="line">result = [t1.timeit(<span class="number">1000</span>), t2.timeit(<span class="number">1000</span>), t3.timeit(<span class="number">1000</span>), t4.timeit(<span class="number">1000</span>)]</span><br><span class="line">method = [<span class="string">"for+ '+'"</span>, <span class="string">"for + append"</span>, <span class="string">"list comprehension"</span>, <span class="string">"list + range"</span>]</span><br><span class="line"></span><br><span class="line">plt.bar(method, result, color=<span class="string">'rgby'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># plt.legend('concat time')</span></span><br><span class="line"><span class="comment"># print(zip(method, result))</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> x,y <span class="keyword">in</span> zip(method, result):</span><br><span class="line">    plt.text(x, y, <span class="string">"%fs"</span> % y)</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://cdn.jsdelivr.net/gh/ssmath/mypic/img/20191002194307.png" alt="Cost time"></p>
-      
-        
-          <div class="button readmore">
-            <a href="/2019/10/02/%E7%AE%80%E5%8D%95%E4%BA%86%E8%A7%A3%E4%B8%8BPython%E5%86%85%E7%BD%AE%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%E7%9A%84%E6%80%A7%E8%83%BD/">
-              Read More <i class="fas fa-chevron-right"></i>
-            </a>
-          </div>
-        
-      
-    </div>
-  </section>
-</article>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <article class="post white-box shadow reveal ">
-  
-
-
-  <section class='meta'>
-    
-    
-    <div class="meta" id="header-meta">
-      
-        
-  <h2 class="title">
-    <a href="/2019/08/08/docker%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
-      docker学习笔记
-    </a>
-  </h2>
-
-
-      
-      <div class='new-meta-box'>
-        
-          
-        
-          
-            
-<div class='new-meta-item author'>
-  <a href="http://www.dreamer1103.tk" target="_blank" rel="nofollow noopener">
-    <img src="https://cdn.jsdelivr.net/gh/xiangyu1103/picgo/img/touxiang02.jpg">
-    <p>Dreamer</p>
-  </a>
-</div>
-
-          
-        
-          
-            
-  
-  <div class='new-meta-item category'>
-    <a href='/categories/docker/' rel="nofollow">
-      <i class="fas fa-folder-open" aria-hidden="true"></i>
-      <p>docker</p>
-    </a>
-  </div>
-
-
-          
-        
-          
-            <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-edit" aria-hidden="true"></i>
-    <p>发布于：2019年8月8日</p>
-  </a>
-</div>
-
-          
-        
-          
-            
-
-          
-        
-          
-            
-
-          
-        
-      </div>
-      
-        <hr>
-      
-    </div>
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      <blockquote>
-<p><a href="https://labs.play-with-docker.com/" target="_blank" rel="noopener">Play With Docker一个免费使用的基于web界面的Docker环境</a></p>
-</blockquote>
-<h1 id="常用docker命令"><a href="#常用docker命令" class="headerlink" title="常用docker命令"></a>常用docker命令</h1><p><strong>可使用<code>docker COMMAND --help</code>查看命令的用法</strong></p>
-<h2 id="Docker镜像相关"><a href="#Docker镜像相关" class="headerlink" title="Docker镜像相关"></a>Docker镜像相关</h2><ul>
-<li>1、<code>docker image pull</code>：用于下载镜像，镜像从远程镜像仓库服务的仓库中下载，默认从Docker Hub的仓库中拉取</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 格式：docker pull [OPTIONS] NAME[:TAG|@DIGEST]</span></span><br><span class="line"><span class="comment"># 说明：如果给出tag，一般拉取latest，name一般为username/repository,digest为镜像摘要可不给出</span></span><br><span class="line">docker image pull ubuntu:latest</span><br><span class="line"><span class="comment"># 这个拉取标签为latest的ubuntu官方镜像，latest: Pulling from library/ubuntu，latest不一定是最新镜像</span></span><br></pre></td></tr></table></figure>
-      
-        
-          <div class="button readmore">
-            <a href="/2019/08/08/docker%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
-              Read More <i class="fas fa-chevron-right"></i>
-            </a>
-          </div>
-        
-      
-    </div>
-  </section>
-</article>
-
-          </div>
-        
-      
     
   </section>
   
@@ -1843,6 +1848,11 @@
             ><div class='name'>docker</div><div class='badge'>(1)</div></a></li>
         
           <li><a class="flat-box"
+            title="/categories/linux/" href="/categories/linux/"
+            id="categorieslinux"
+            ><div class='name'>linux</div><div class='badge'>(2)</div></a></li>
+        
+          <li><a class="flat-box"
             title="/categories/math/" href="/categories/math/"
             id="categoriesmath"
             ><div class='name'>math</div><div class='badge'>(1)</div></a></li>
@@ -1889,7 +1899,7 @@
 
 
     <div class='content'>
-      <a href="/tags/Algorithm/" style="font-size: 14px; color: #999">Algorithm</a> <a href="/tags/Astronomy/" style="font-size: 14px; color: #999">Astronomy</a> <a href="/tags/CPP/" style="font-size: 20px; color: #707070">CPP</a> <a href="/tags/CSS/" style="font-size: 14px; color: #999">CSS</a> <a href="/tags/Flask/" style="font-size: 18px; color: #7e7e7e">Flask</a> <a href="/tags/Git/" style="font-size: 20px; color: #707070">Git</a> <a href="/tags/HTML/" style="font-size: 16px; color: #8b8b8b">HTML</a> <a href="/tags/Json/" style="font-size: 14px; color: #999">Json</a> <a href="/tags/Jupyter/" style="font-size: 14px; color: #999">Jupyter</a> <a href="/tags/Latex/" style="font-size: 14px; color: #999">Latex</a> <a href="/tags/Linux/" style="font-size: 14px; color: #999">Linux</a> <a href="/tags/Python/" style="font-size: 24px; color: #555">Python</a> <a href="/tags/Requests/" style="font-size: 14px; color: #999">Requests</a> <a href="/tags/Scrapy/" style="font-size: 14px; color: #999">Scrapy</a> <a href="/tags/blog/" style="font-size: 14px; color: #999">blog</a> <a href="/tags/docker/" style="font-size: 14px; color: #999">docker</a> <a href="/tags/hexo/" style="font-size: 20px; color: #707070">hexo</a> <a href="/tags/linux/" style="font-size: 14px; color: #999">linux</a> <a href="/tags/mysql-linux/" style="font-size: 14px; color: #999">mysql , linux</a> <a href="/tags/nginx/" style="font-size: 14px; color: #999">nginx</a> <a href="/tags/web-%E6%82%A6%E8%AF%BB/" style="font-size: 14px; color: #999">web , 悦读</a> <a href="/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" style="font-size: 14px; color: #999">正则表达式</a> <a href="/tags/%E7%88%AC%E8%99%AB/" style="font-size: 18px; color: #7e7e7e">爬虫</a> <a href="/tags/%E9%9A%8F%E7%AC%94/" style="font-size: 22px; color: #636363">随笔</a> <a href="/tags/%E9%9D%99%E6%80%81%E7%B1%BB%E5%9E%8B%E6%A3%80%E6%9F%A5/" style="font-size: 14px; color: #999">静态类型检查</a>
+      <a href="/tags/Algorithm/" style="font-size: 14px; color: #999">Algorithm</a> <a href="/tags/Astronomy/" style="font-size: 14px; color: #999">Astronomy</a> <a href="/tags/CPP/" style="font-size: 20px; color: #707070">CPP</a> <a href="/tags/CSS/" style="font-size: 14px; color: #999">CSS</a> <a href="/tags/Flask/" style="font-size: 18px; color: #7e7e7e">Flask</a> <a href="/tags/Git/" style="font-size: 20px; color: #707070">Git</a> <a href="/tags/HTML/" style="font-size: 16px; color: #8b8b8b">HTML</a> <a href="/tags/Json/" style="font-size: 14px; color: #999">Json</a> <a href="/tags/Jupyter/" style="font-size: 14px; color: #999">Jupyter</a> <a href="/tags/Latex/" style="font-size: 14px; color: #999">Latex</a> <a href="/tags/Linux/" style="font-size: 14px; color: #999">Linux</a> <a href="/tags/Python/" style="font-size: 24px; color: #555">Python</a> <a href="/tags/Requests/" style="font-size: 14px; color: #999">Requests</a> <a href="/tags/Scrapy/" style="font-size: 14px; color: #999">Scrapy</a> <a href="/tags/blog/" style="font-size: 14px; color: #999">blog</a> <a href="/tags/docker/" style="font-size: 14px; color: #999">docker</a> <a href="/tags/hexo/" style="font-size: 20px; color: #707070">hexo</a> <a href="/tags/k8s/" style="font-size: 14px; color: #999">k8s</a> <a href="/tags/linux/" style="font-size: 18px; color: #7e7e7e">linux</a> <a href="/tags/mysql-linux/" style="font-size: 14px; color: #999">mysql , linux</a> <a href="/tags/nginx/" style="font-size: 14px; color: #999">nginx</a> <a href="/tags/web-%E6%82%A6%E8%AF%BB/" style="font-size: 14px; color: #999">web , 悦读</a> <a href="/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" style="font-size: 14px; color: #999">正则表达式</a> <a href="/tags/%E7%88%AC%E8%99%AB/" style="font-size: 18px; color: #7e7e7e">爬虫</a> <a href="/tags/%E9%9A%8F%E7%AC%94/" style="font-size: 22px; color: #636363">随笔</a> <a href="/tags/%E9%9D%99%E6%80%81%E7%B1%BB%E5%9E%8B%E6%A3%80%E6%9F%A5/" style="font-size: 14px; color: #999">静态类型检查</a>
     </div>
   </section>
 
