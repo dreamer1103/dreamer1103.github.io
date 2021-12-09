@@ -1,0 +1,1140 @@
+<!DOCTYPE html>
+<html>
+<head hexo-theme='https://volantis.js.org/#2.1.2'>
+  <meta charset="utf-8">
+  <!-- SEO相关 -->
+  
+    
+  
+  <!-- 渲染优化 -->
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <!-- 页面元数据 -->
+  
+    <title>博客搭建历程（4） - DREAMER</title>
+  
+    <meta name="keywords" content="hexo">
+  
+  
+    <meta name="description" content="博客评论系统的选择其他评论系统参考经过一波折腾，最终选择了Valine我喜欢它的匿名评论，23333！！！
+参考教程 作者的博客   Valine文档
+https://github.com/litten/hexo-theme-yilia/pull/646
+https://www.xxwhite.com/2017/...">
+  
+
+  <!-- feed -->
+  
+
+  <!-- import meta -->
+  
+
+  <!-- link -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css">
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.css">
+
+  
+
+  
+
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10/dist/APlayer.min.css">
+  
+
+  <!-- import link -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/style.css">
+
+  
+
+  <script>
+    function setLoadingBarProgress(num) {
+      document.getElementById('loading-bar').style.width=num+"%";
+    }
+  </script>
+
+  
+  
+</head>
+
+<body>
+  
+  <div id="loading-bar-wrapper">
+  <div id="loading-bar"></div>
+</div>
+<header class="l_header shadow blur">
+
+  <div class='wrapper'>
+    <div class='nav-sub container--flex'>
+      <a class="logo flat-box"></a>
+      <ul class='switcher h-list'>
+        <li><a class="s-comment flat-btn fas fa-comments fa-fw" target="_self" href='javascript:void(0)'></a></li>
+        
+          <li><a class="s-toc flat-btn fas fa-list fa-fw" target="_self" href='javascript:void(0)'></a></li>
+        
+      </ul>
+    </div>
+		<div class="nav-main container container--flex">
+      
+        
+        <a class="logo flat-box" target="_self" href='/'>
+          
+          
+          
+          
+            DREAMER <b><sup style='color:#3AA757'>2.1.2</sup></b>
+          
+        </a>
+      
+
+			<div class='menu navigation'>
+				<ul class='h-list'>
+          
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/
+                  
+                  
+                  
+                    id="home"
+                  >
+                  
+                    <i class='fas fa-clock fa-fw fa-fw'></i>
+                  
+                  近期
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" 
+                  
+                  
+                  >
+                  
+                    <i class='fas fa-list-alt fa-fw fa-fw'></i>
+                  
+                  索引
+                </a>
+                
+                  <ul class="submenu">
+                    
+                      
+            
+              <li>
+                <a class="flat-box" href=/categories/
+                  
+                  
+                  
+                    id="categories"
+                  >
+                  
+                    <i class='fas fa-folder-open fa-fw'></i>
+                  
+                  文章分类
+                </a>
+                
+              </li>
+            
+          
+                    
+                      
+            
+              <li>
+                <a class="flat-box" href=/tags/
+                  
+                  
+                  
+                    id="tags"
+                  >
+                  
+                    <i class='fas fa-tags fa-fw'></i>
+                  
+                  所有标签
+                </a>
+                
+              </li>
+            
+          
+                    
+                      
+            
+              <li>
+                <a class="flat-box" href=/archives/
+                  
+                  
+                  
+                    id="archives"
+                  >
+                  
+                    <i class='fas fa-archive fa-fw'></i>
+                  
+                  时光轴
+                </a>
+                
+              </li>
+            
+          
+                    
+                  </ul>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/Collect
+                  
+                  
+                  
+                    id="Collect"
+                  >
+                  
+                    <i class='fas fa-laptop-code fa-fw fa-fw'></i>
+                  
+                  项目
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/about
+                  
+                  
+                  
+                    id="about"
+                  >
+                  
+                    <i class='fas fa-info-circle fa-fw'></i>
+                  
+                  关于
+                </a>
+                
+                  <ul class="submenu">
+                    
+                      
+            
+              <li>
+                <a class="flat-box" href=http://reusme.dreamer1103.tk/
+                  
+                  
+                  
+                    id="http:reusme.dreamer1103.tk"
+                  >
+                  
+                    <i class='fas fa-folder-open fa-fw'></i>
+                  
+                  个人简历
+                </a>
+                
+              </li>
+            
+          
+                    
+                      
+            
+              <li>
+                <a class="flat-box" href=/friends/
+                  
+                  
+                  
+                    id="friends"
+                  >
+                  
+                    <i class='fas fa-link fa-fw'></i>
+                  
+                  友链
+                </a>
+                
+              </li>
+            
+          
+                    
+                  </ul>
+                
+              </li>
+            
+          
+          
+				</ul>
+			</div>
+
+      
+        <div class="m_search">
+          <form name="searchform" class="form u-search-form">
+            <i class="icon fas fa-search fa-fw"></i>
+            <input type="text" class="input u-search-input" placeholder="搜索" />
+          </form>
+        </div>
+      
+
+			<ul class='switcher h-list'>
+				
+					<li><a class="s-search flat-btn fas fa-search fa-fw" target="_self" href='javascript:void(0)'></a></li>
+				
+				<li><a class="s-menu flat-btn fas fa-bars fa-fw" target="_self" href='javascript:void(0)'></a></li>
+			</ul>
+		</div>
+	</div>
+</header>
+<ul class="menu-phone navigation white-box">
+  
+  
+    <li>
+      <a class="flat-box" href=/
+        
+        
+        
+          id="home"
+        >
+        
+          <i class='fas fa-rss fa-fw'></i>
+        
+        博客
+      </a>
+    </li>
+  
+    <li>
+      <a class="flat-box" href=/categories/
+        
+        
+        
+          id="categories"
+        >
+        
+          <i class='fas fa-folder-open fa-fw'></i>
+        
+        分类
+      </a>
+    </li>
+  
+    <li>
+      <a class="flat-box" href=/tags/
+        
+        
+        
+          id="tags"
+        >
+        
+          <i class='fas fa-tags fa-fw'></i>
+        
+        标签
+      </a>
+    </li>
+  
+    <li>
+      <a class="flat-box" href=/archives/
+        
+        
+        
+          id="archives"
+        >
+        
+          <i class='fas fa-archive fa-fw'></i>
+        
+        归档
+      </a>
+    </li>
+  
+    <li>
+      <a class="flat-box" href=/Collect
+        
+        
+        
+          id="Collect"
+        >
+        
+          <i class='fas fa-laptop-code fa-fw fa-fw'></i>
+        
+        项目
+      </a>
+    </li>
+  
+    <li>
+      <a class="flat-box" href=https://blog.dreamer.ga/docsify/#/
+        
+        
+        
+          id="https:blog.dreamer.gadocsify#"
+        >
+        
+          <i class='fas fa-book fa-fw fa-fw'></i>
+        
+        文档
+      </a>
+    </li>
+  
+    <li>
+      <a class="flat-box" href=/about/
+        
+        
+        
+          id="about"
+        >
+        
+          <i class='fas fa-info-circle fa-fw'></i>
+        
+        关于
+      </a>
+    </li>
+  
+</ul>
+<script>setLoadingBarProgress(40);</script>
+
+
+
+  <div class="l_body nocover">
+    <div class='body-wrapper'>
+      
+
+<div class='l_main'>
+  
+
+  
+    <article id="post" class="post white-box shadow article-type-post" itemscope itemprop="blogPost">
+      
+
+
+  <section class='meta'>
+    
+    
+    <div class="meta" id="header-meta">
+      
+        
+  
+    <h1 class="title">
+      <a href="/2018/09/27/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E5%8E%86%E7%A8%8B%EF%BC%884%EF%BC%89/">
+        博客搭建历程（4）
+      </a>
+    </h1>
+  
+
+
+      
+      <div class='new-meta-box'>
+        
+          
+        
+          
+            
+<div class='new-meta-item author'>
+  <a href="http://www.dreamer1103.tk" target="_blank" rel="nofollow noopener">
+    <img src="https://cdn.jsdelivr.net/gh/xiangyu1103/picgo/img/touxiang02.jpg">
+    <p>Dreamer</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/blog/' rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>blog</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-edit" aria-hidden="true"></i>
+    <p>发布于：2018年9月27日</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+      <section class="article typo">
+        <div class="article-entry" itemprop="articleBody">
+          
+          <h1 id="博客评论系统的选择"><a href="#博客评论系统的选择" class="headerlink" title="博客评论系统的选择"></a>博客评论系统的选择</h1><h4 id="其他评论系统参考"><a href="#其他评论系统参考" class="headerlink" title="其他评论系统参考"></a><a href="https://blog.csdn.net/weixin_41196185/article/details/79178780" target="_blank" rel="noopener">其他评论系统参考</a></h4><p><font color="red">经过一波折腾，最终选择了Valine</font><br><font size="4" color="green">我喜欢它的匿名评论，23333！！！</font></p>
+<h3 id="参考教程-作者的博客-Valine文档"><a href="#参考教程-作者的博客-Valine文档" class="headerlink" title="参考教程 作者的博客   Valine文档"></a>参考教程 <a href="https://ioliu.cn/2017/add-valine-comments-to-your-blog/" target="_blank" rel="noopener">作者的博客</a>   <a href="https://valine.js.org/" target="_blank" rel="noopener">Valine文档</a></h3><ul>
+<li><a href="https://github.com/litten/hexo-theme-yilia/pull/646" target="_blank" rel="noopener">https://github.com/litten/hexo-theme-yilia/pull/646</a></li>
+<li><a href="https://www.xxwhite.com/2017/Valine.html" target="_blank" rel="noopener">https://www.xxwhite.com/2017/Valine.html</a></li>
+<li><a href="https://panjunwen.com/diy-a-comment-system/" target="_blank" rel="noopener">https://panjunwen.com/diy-a-comment-system/</a></li>
+</ul>
+<a id="more"></a>
+<h2 id="安装过程简记"><a href="#安装过程简记" class="headerlink" title="安装过程简记"></a>安装过程简记</h2><ul>
+<li>注册<a href="https://leancloud.cn/" target="_blank" rel="noopener">Leancloud</a></li>
+<li>创建应用</li>
+<li>获取appid和appkey</li>
+<li>设置安全域名</li>
+</ul>
+<p><img src="https://i.imgur.com/z6ScJ8h.png" alt=""></p>
+<p><img src="https://i.imgur.com/98lsq22.png" alt=""></p>
+<p><img src="https://i.imgur.com/Ppruek5.png" alt=""></p>
+<p><img src="https://i.imgur.com/sRNNe85.png" alt=""></p>
+<h4 id="部署云引擎-参考"><a href="#部署云引擎-参考" class="headerlink" title="部署云引擎 参考"></a>部署云引擎 <a href="https://panjunwen.com/valine-admin-document/" target="_blank" rel="noopener">参考</a></h4><p>设置好环境变量</p>
+<h3 id="yilia主题修改"><a href="#yilia主题修改" class="headerlink" title="yilia主题修改"></a>yilia主题修改</h3><h4 id="1、修改themes-yilia-config-yml"><a href="#1、修改themes-yilia-config-yml" class="headerlink" title="1、修改themes\yilia\_config.yml"></a>1、修改<code>themes\yilia\_config.yml</code></h4><p><a href="https://github.com/litten/hexo-theme-yilia/pull/646" target="_blank" rel="noopener">https://github.com/litten/hexo-theme-yilia/pull/646</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#6、Valine https://valine.js.org</span></span><br><span class="line">valine:</span><br><span class="line">  <span class="built_in">enable</span>: <span class="literal">true</span></span><br><span class="line">  appid:    <span class="comment">#LeanCloud的appId</span></span><br><span class="line">  appkey:   <span class="comment">#Leancloud的appKey</span></span><br><span class="line">  verify: <span class="literal">false</span> <span class="comment">#验证码</span></span><br><span class="line">  notifi: <span class="literal">false</span> <span class="comment">#评论回复提醒</span></span><br><span class="line">  avatar: <span class="string">' '</span><span class="comment">#评论列表头像样式</span></span><br><span class="line">  placeholder: Just go go <span class="comment">#评论占位框</span></span><br><span class="line">  pageSize: 15    <span class="comment">#评论分页</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="2、修改themes-yilia-layout-partial-article-ejs"><a href="#2、修改themes-yilia-layout-partial-article-ejs" class="headerlink" title="2、修改themes\yilia\layout\_partial\article.ejs"></a>2、修改<code>themes\yilia\layout\_partial\article.ejs</code></h4><p>我是在尾部位添加的<br><img src="http://pflr7ix8q.bkt.clouddn.com/18-9-27/40764127.jpg" alt=""></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;% <span class="keyword">if</span> (theme.valine &amp;&amp; theme.valine.appid &amp;&amp; theme.valine.appkey)&#123; %&gt;</span><br><span class="line">    &lt;section id=<span class="string">"comments"</span> style=<span class="string">"margin:10px;padding:10px;background:#fff;"</span>&gt;</span><br><span class="line">      &lt;%- partial(<span class="string">'post/valine'</span>, &#123;</span><br><span class="line">        key: post.slug,</span><br><span class="line">        title: post.title,</span><br><span class="line">        url: config.url+url_for(post.path)</span><br><span class="line">        &#125;) %&gt;</span><br><span class="line">    &lt;/section&gt;</span><br><span class="line">  &lt;% &#125; %&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="在themes-yilia-layout-partial-post下新建个·valine-ejs·文件"><a href="#在themes-yilia-layout-partial-post下新建个·valine-ejs·文件" class="headerlink" title="在themes\yilia\layout\_partial\post下新建个·valine.ejs·文件"></a>在<code>themes\yilia\layout\_partial\post</code>下新建个·valine.ejs·文件</h4><p>添加如下代码</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=<span class="string">"vcomment"</span> class=<span class="string">"comment"</span>&gt;&lt;/div&gt; </span><br><span class="line">&lt;script src=<span class="string">"//cdn1.lncld.net/static/js/3.0.4/av-min.js"</span>&gt;&lt;/script&gt;</span><br><span class="line">&lt;script src=<span class="string">"//unpkg.com/valine/dist/Valine.min.js"</span>&gt;&lt;/script&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">   var notify = <span class="string">'&lt;%= theme.valine.notify %&gt;'</span> == <span class="literal">true</span> ? <span class="literal">true</span> : <span class="literal">false</span>;</span><br><span class="line">   var verify = <span class="string">'&lt;%= theme.valine.verify %&gt;'</span> == <span class="literal">true</span> ? <span class="literal">true</span> : <span class="literal">false</span>;</span><br><span class="line">    window.onload = <span class="function"><span class="title">function</span></span>() &#123;</span><br><span class="line">        new Valine(&#123;</span><br><span class="line">            el: <span class="string">'#vcomment'</span>,</span><br><span class="line">            notify: notify,</span><br><span class="line">            verify: verify,</span><br><span class="line">            app_id: <span class="string">"&lt;%= theme.valine.appid %&gt;"</span>,</span><br><span class="line">            app_key: <span class="string">"&lt;%= theme.valine.appkey %&gt;"</span>,</span><br><span class="line">            placeholder: <span class="string">"&lt;%= theme.valine.placeholder %&gt;"</span>,</span><br><span class="line">            avatar:<span class="string">"&lt;%= theme.valine.avatar %&gt;"</span></span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="测试下效果"><a href="#测试下效果" class="headerlink" title="测试下效果"></a>测试下效果</h4><pre><code>hexo g
+hexo s</code></pre><p><a href="http://localhost:4000" target="_blank" rel="noopener">预览</a></p>
+<p>没问题就部署到github吧<br>    hexo d -g</p>
+<h1 id="定时器添加"><a href="#定时器添加" class="headerlink" title="定时器添加"></a>定时器添加</h1><p><a href="https://github.com/zhaojun1998/Valine-Admin/issues/1" target="_blank" rel="noopener">https://github.com/zhaojun1998/Valine-Admin/issues/1
+</a></p>
+
+          
+            <br>
+            
+  
+    
+    
+
+<section class="widget copyright  desktop mobile">
+  <div class='content'>
+    
+      <blockquote>
+        
+          
+            <p>博客内容遵循 署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</p>
+
+          
+        
+          
+            <p>本文永久链接是：<a href=https://dreamer1103.github.io/2018/09/27/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E5%8E%86%E7%A8%8B%EF%BC%884%EF%BC%89/>https://dreamer1103.github.io/2018/09/27/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E5%8E%86%E7%A8%8B%EF%BC%884%EF%BC%89/</a></p>
+          
+        
+      </blockquote>
+    
+  </div>
+</section>
+
+  
+
+  
+    
+    
+
+<section class="widget qrcode  desktop mobile">
+  
+
+  <div class='content article-entry'>
+    
+      
+        <fancybox><img src='https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/qrcode/wiki_volantis.png'
+        
+          height='64px'
+        ></fancybox>
+      
+    
+      
+        <fancybox><img src='https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/qrcode/wiki_volantis.png'
+        
+          height='64px'
+        ></fancybox>
+      
+    
+  </div>
+</section>
+
+  
+
+
+          
+        </div>
+        
+          
+
+
+  <section class='meta' id="footer-meta">
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-03-14T23:25:59+08:00">
+  <a class='notlink'>
+    <i class="fas fa-save" aria-hidden="true"></i>
+    <p>更新于：2020年3月14日</p>
+  </a>
+</div>
+
+        
+      
+        
+          
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/hexo/" rel="nofollow"><i class="fas fa-hashtag" aria-hidden="true"></i><p>hexo</p></a></div>
+
+
+        
+      
+        
+          
+
+        
+      
+        
+          
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
+    
+      
+        <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer"
+          
+          href="http://connect.qq.com/widget/shareqq/index.html?url=https://dreamer1103.github.io/2018/09/27/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E5%8E%86%E7%A8%8B%EF%BC%884%EF%BC%89/&title=博客搭建历程（4） - DREAMER&summary=博客评论系统的选择其他评论系统参考经过一波折腾，最终选择了Valine我喜欢它的匿名评论，23333！！！
+参考教程 作者的博客   Valine文档
+https://github.com/litten/hexo-theme-yilia/pull/646
+https://www.xxwhite.com/2017/Valine.html
+https://panjunwen.com/diy-a-comment-system/
+"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/qq.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer"
+          
+          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dreamer1103.github.io/2018/09/27/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E5%8E%86%E7%A8%8B%EF%BC%884%EF%BC%89/&title=博客搭建历程（4） - DREAMER&summary=博客评论系统的选择其他评论系统参考经过一波折腾，最终选择了Valine我喜欢它的匿名评论，23333！！！
+参考教程 作者的博客   Valine文档
+https://github.com/litten/hexo-theme-yilia/pull/646
+https://www.xxwhite.com/2017/Valine.html
+https://panjunwen.com/diy-a-comment-system/
+"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/qzone.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer"
+          
+          href="http://service.weibo.com/share/share.php?url=https://dreamer1103.github.io/2018/09/27/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E5%8E%86%E7%A8%8B%EF%BC%884%EF%BC%89/&title=博客搭建历程（4） - DREAMER&summary=博客评论系统的选择其他评论系统参考经过一波折腾，最终选择了Valine我喜欢它的匿名评论，23333！！！
+参考教程 作者的博客   Valine文档
+https://github.com/litten/hexo-theme-yilia/pull/646
+https://www.xxwhite.com/2017/Valine.html
+https://panjunwen.com/diy-a-comment-system/
+"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/weibo.png">
+          
+        </a>
+      
+    
+  </div>
+</div>
+
+
+
+        
+      
+    </div>
+  </section>
+
+
+        
+        
+          <div class="prev-next">
+            
+              <a class='prev' href='/2018/09/29/%E7%AE%80%E5%8D%95%E7%88%AC%E8%99%AB/'>
+                <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>简单爬虫</p>
+                <p class='content'>Requests库入门http://www.python-requests.org/en/master/requests
+Requests库的7个主要方法
+
+
+方法
+说明
+
+
+
+requests...</p>
+              </a>
+            
+            
+              <a class='next' href='/2018/09/26/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E5%8E%86%E7%A8%8B%EF%BC%883%EF%BC%89/'>
+                <p class='title'>博客搭建历程（3）<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+                <p class='content'>hexo生成工程文件介绍
+hexo插件
+
+
+主题yilia
+
+默认目录结构具体参考
+
+
+|--.deploy
+|--public
+|--scaffolds
+|--source
+|--themes...</p>
+              </a>
+            
+          </div>
+        
+      </section>
+    </article>
+  
+
+  
+    <!-- 显示推荐文章和评论 -->
+
+
+
+  <article class="post white-box comments shadow">
+    <section class="article typo">
+      <p ct><i class='fas fa-comments'></i> 评论</p>
+      
+      
+      
+      
+      
+        <section id="comments">
+          <div id="valine_container" class="valine_thread">
+            <i class="fas fa-spinner fa-spin fa-fw"></i>
+          </div>
+        </section>
+      
+    </section>
+  </article>
+
+
+  
+
+
+
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+
+
+  <script>
+    window.subData = {
+      title: '博客搭建历程（4）',
+      tools: true
+    }
+  </script>
+
+
+</div>
+<aside class='l_side'>
+  
+  
+    
+    
+
+<section class="widget qrcode shadow desktop">
+  
+  <header>
+    
+      <i class="fas fa-mobile fa-fw" aria-hidden="true"></i><span class='name'>手机观看</span>
+    
+  </header>
+
+
+  <div class='content article-entry'>
+    
+      
+        <img src='https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/qrcode/wiki_volantis.png'
+        >
+      
+    
+  </div>
+</section>
+
+  
+
+  
+    
+    
+
+
+  <section class="widget toc-wrapper shadow desktop mobile">
+    
+  <header>
+    
+      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>本文目录</span>
+    
+  </header>
+
+
+    <div class='content'>
+      <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#其他评论系统参考"><span class="toc-text">其他评论系统参考</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考教程-作者的博客-Valine文档"><span class="toc-text">参考教程 作者的博客   Valine文档</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装过程简记"><span class="toc-text">安装过程简记</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#部署云引擎-参考"><span class="toc-text">部署云引擎 参考</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#yilia主题修改"><span class="toc-text">yilia主题修改</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1、修改themes-yilia-config-yml"><span class="toc-text">1、修改themes\yilia\_config.yml</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2、修改themes-yilia-layout-partial-article-ejs"><span class="toc-text">2、修改themes\yilia\layout\_partial\article.ejs</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#在themes-yilia-layout-partial-post下新建个·valine-ejs·文件"><span class="toc-text">在themes\yilia\layout\_partial\post下新建个·valine.ejs·文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#测试下效果"><span class="toc-text">测试下效果</span></a></li></ol>
+    </div>
+  </section>
+
+
+  
+
+
+</aside>
+
+
+  
+  <footer class="clearfix ">
+    <br><br>
+    
+      
+        <div class="aplayer-container">
+          
+
+  
+    <meting-js
+      theme='#1BCDFC'
+      autoplay='false'
+      volume='0.7'
+      loop='all'
+      order='list'
+      fixed='false'
+      list-max-height='340px'
+      server='netease'
+      type='playlist'
+      id='3175833810'
+      list-folded='true'>
+    </meting-js>
+  
+
+
+        </div>
+      
+    
+      
+        <br>
+        <div class="social-wrapper">
+          
+            
+              <a href="/atom.xml"
+                class="social fas fa-rss flat-btn"
+                target="_blank"
+                rel="external nofollow noopener noreferrer">
+              </a>
+            
+          
+            
+              <a href="mailto:me@xaoxuu.com"
+                class="social fas fa-envelope flat-btn"
+                target="_blank"
+                rel="external nofollow noopener noreferrer">
+              </a>
+            
+          
+            
+              <a href="https://github.com/xaoxuu"
+                class="social fab fa-github flat-btn"
+                target="_blank"
+                rel="external nofollow noopener noreferrer">
+              </a>
+            
+          
+            
+              <a href="https://music.163.com/#/user/home?id=63035382"
+                class="social fas fa-headphones-alt flat-btn"
+                target="_blank"
+                rel="external nofollow noopener noreferrer">
+              </a>
+            
+          
+        </div>
+      
+    
+      
+        <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+</div>
+      
+    
+      
+        本站使用
+        <a href="https://www.dreamer1103.tk/" target="_blank" class="codename">Dreamer</a>
+        作为主题
+        
+          ，
+          总访问量为
+          <span id="busuanzi_value_site_pv"><i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span>
+          次
+        
+      
+    
+      
+        <div class='copyright'>
+        <p><a href="https://xaoxuu.com" target="_blank" rel="noopener">Copyright © 2017-2020 Mr. X</a></p>
+
+        </div>
+      
+    
+  </footer>
+
+<script>setLoadingBarProgress(80);</script>
+
+
+      <script>setLoadingBarProgress(60);</script>
+    </div>
+    <a class="s-top fas fa-arrow-up fa-fw" href='javascript:void(0)'></a>
+  </div>
+  
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.3/dist/jquery.min.js"></script>
+
+
+  <script>
+    
+    var SEARCH_SERVICE = "hexo" || "hexo";
+    var ROOT = "/" || "/";
+    if (!ROOT.endsWith('/')) ROOT += '/';
+  </script>
+
+
+  <script async src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2/js/instant_page.js" type="module" defer integrity="sha384-OeDn4XE77tdHo8pGtE1apMPmAipjoxUQ++eeJa6EtJCfHlvijigWiJpD7VDPWXV1"></script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.js" async></script>
+
+  <script type="text/javascript">
+    $(function() {
+      Waves.attach('.flat-btn', ['waves-button']);
+      Waves.attach('.float-btn', ['waves-button', 'waves-float']);
+      Waves.attach('.float-btn-light', ['waves-button', 'waves-float', 'waves-light']);
+      Waves.attach('.flat-box', ['waves-block']);
+      Waves.attach('.float-box', ['waves-block', 'waves-float']);
+      Waves.attach('.waves-image');
+      Waves.init();
+    });
+  </script>
+
+
+  <script async src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-busuanzi@2.3/js/busuanzi.pure.mini.js"></script>
+
+
+
+  
+  
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/jquery-backstretch@2.1.18/jquery.backstretch.min.js"></script>
+
+    <script type="text/javascript">
+      $(function(){
+        var imgs=["https://cdn.jsdelivr.net/gh/xaoxuu/cdn-wallpaper/abstract/41F215B9-261F-48B4-80B5-4E86E165259E.jpeg"];
+        if ('true' == 'true') {
+          function shuffle(arr){
+            /*From countercurrent-time*/
+            var n = arr.length;
+            while(n--) {
+              var index = Math.floor(Math.random() * n);
+              var temp = arr[index];
+              arr[index] = arr[n];
+              arr[n] = temp;
+            }
+          }
+          shuffle(imgs);
+        }
+        if ('.cover') {
+          $('.cover').backstretch(
+            imgs,
+          {
+            duration: "20000",
+            fade: "1500"
+          });
+        } else {
+          $.backstretch(
+            imgs,
+          {
+            duration: "20000",
+            fade: "1500"
+          });
+        }
+      });
+    </script>
+  
+
+
+
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/aplayer@1.10/dist/APlayer.min.js" async></script>
+
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/meting@2.0/dist/Meting.min.js" async></script>
+
+  
+
+
+
+
+
+
+
+
+  
+    
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2.0/js/valine.js"></script>
+
+  
+  <script>
+  var GUEST_INFO = ['nick','mail','link'];
+  var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+    return GUEST_INFO.indexOf(item) > -1
+  });
+  var notify = 'true' == true;
+  var verify = 'true' == true;
+  var valine = new Valine();
+  valine.init({
+    el: '#valine_container',
+    notify: notify,
+    verify: verify,
+    guest_info: guest_info,
+    
+    appId: "yRrWxdm60ya2scYz7h6mjamr-gzGzoHsz",
+    appKey: "9s7yETi1nLzx2hQ0OhE6508X",
+    placeholder: "快来评论吧~",
+    pageSize:'10',
+    avatar:'mp',
+    lang:'zh-cn',
+    visitor: 'false',
+    highlight:'true'
+  })
+  </script>
+
+
+
+  
+<script src="/js/app.js"></script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2.1/js/search.js"></script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2/js/comment_typing.js"></script>
+
+
+
+<!-- 复制 -->
+
+  <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  /*页面载入完成后，创建复制按钮*/
+  !function (e, t, a) {
+    /* code */
+    function on_success(){
+      let $btn = $('.highlight .code pre');
+      console.log($btn);
+    }
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="fas fa-copy"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copyed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('fa-copy');
+        $icon.addClass('fa-clipboard-check');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPYED';
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('fa-copy');
+        $icon.addClass('fa-exclamation-triangle');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+
+
+<!-- fancybox -->
+
+  <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script>
+  let LAZY_LOAD_IMAGE = "";
+  $(".article-entry").find("fancybox").find("img").each(function () {
+      var element = document.createElement("a");
+      $(element).attr("data-fancybox", "gallery");
+      $(element).attr("href", $(this).attr("src"));
+      /* 图片采用懒加载处理时,
+       * 一般图片标签内会有个属性名来存放图片的真实地址，比如 data-original,
+       * 那么此处将原本的属性名src替换为对应属性名data-original,
+       * 修改如下
+       */
+       if (LAZY_LOAD_IMAGE) {
+         $(element).attr("href", $(this).attr("data-original"));
+       }
+      $(this).wrap(element);
+  });
+</script>
+
+
+
+
+
+
+  <script>setLoadingBarProgress(100);</script>
+</body>
+</html>

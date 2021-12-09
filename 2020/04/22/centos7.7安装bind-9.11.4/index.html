@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html>
+<head hexo-theme='https://volantis.js.org/#2.1.2'>
+  <meta charset="utf-8">
+  <!-- SEO相关 -->
+  
+    
+  
+  <!-- 渲染优化 -->
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <!-- 页面元数据 -->
+  
+    <title>Centos7.7安装bind-9.11.4 - DREAMER</title>
+  
+    <meta name="keywords" content="linux,k8s">
+  
+  
+
+  <!-- feed -->
+  
+
+  <!-- import meta -->
+  
+
+  <!-- link -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css">
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.css">
+
+  
+
+  
+
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10/dist/APlayer.min.css">
+  
+
+  <!-- import link -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/style.css">
+
+  
+
+  <script>
+    function setLoadingBarProgress(num) {
+      document.getElementById('loading-bar').style.width=num+"%";
+    }
+  </script>
+
+  
+  
+</head>
+
+<body>
+  
+  <div id="loading-bar-wrapper">
+  <div id="loading-bar"></div>
+</div>
+<header class="l_header shadow blur">
+
+  <div class='wrapper'>
+    <div class='nav-sub container--flex'>
+      <a class="logo flat-box"></a>
+      <ul class='switcher h-list'>
+        <li><a class="s-comment flat-btn fas fa-comments fa-fw" target="_self" href='javascript:void(0)'></a></li>
+        
+          <li><a class="s-toc flat-btn fas fa-list fa-fw" target="_self" href='javascript:void(0)'></a></li>
+        
+      </ul>
+    </div>
+		<div class="nav-main container container--flex">
+      
+        
+        <a class="logo flat-box" target="_self" href='/'>
+          
+          
+          
+          
+            DREAMER <b><sup style='color:#3AA757'>2.1.2</sup></b>
+          
+        </a>
+      
+
+			<div class='menu navigation'>
+				<ul class='h-list'>
+          
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/
+                  
+                  
+                  
+                    id="home"
+                  >
+                  
+                    <i class='fas fa-clock fa-fw fa-fw'></i>
+                  
+                  近期
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" 
+                  
+                  
+                  >
+                  
+                    <i class='fas fa-list-alt fa-fw fa-fw'></i>
+                  
+                  索引
+                </a>
+                
+                  <ul class="submenu">
+                    
+                      
+            
+              <li>
+                <a class="flat-box" href=/categories/
+                  
+                  
+                  
+                    id="categories"
+                  >
+                  
+                    <i class='fas fa-folder-open fa-fw'></i>
+                  
+                  文章分类
+                </a>
+                
+              </li>
+            
+          
+                    
+                      
+            
+              <li>
+                <a class="flat-box" href=/tags/
+                  
+                  
+                  
+                    id="tags"
+                  >
+                  
+                    <i class='fas fa-tags fa-fw'></i>
+                  
+                  所有标签
+                </a>
+                
+              </li>
+            
+          
+                    
+                      
+            
+              <li>
+                <a class="flat-box" href=/archives/
+                  
+                  
+                  
+                    id="archives"
+                  >
+                  
+                    <i class='fas fa-archive fa-fw'></i>
+                  
+                  时光轴
+                </a>
+                
+              </li>
+            
+          
+                    
+                  </ul>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/Collect
+                  
+                  
+                  
+                    id="Collect"
+                  >
+                  
+                    <i class='fas fa-laptop-code fa-fw fa-fw'></i>
+                  
+                  项目
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/about
+                  
+                  
+                  
+                    id="about"
+                  >
+                  
+                    <i class='fas fa-info-circle fa-fw'></i>
+                  
+                  关于
+                </a>
+                
+                  <ul class="submenu">
+                    
+                      
+            
+              <li>
+                <a class="flat-box" href=http://reusme.dreamer1103.tk/
+                  
+                  
+                  
+                    id="http:reusme.dreamer1103.tk"
+                  >
+                  
+                    <i class='fas fa-folder-open fa-fw'></i>
+                  
+                  个人简历
+                </a>
+                
+              </li>
+            
+          
+                    
+                      
+            
+              <li>
+                <a class="flat-box" href=/friends/
+                  
+                  
+                  
+                    id="friends"
+                  >
+                  
+                    <i class='fas fa-link fa-fw'></i>
+                  
+                  友链
+                </a>
+                
+              </li>
+            
+          
+                    
+                  </ul>
+                
+              </li>
+            
+          
+          
+				</ul>
+			</div>
+
+      
+        <div class="m_search">
+          <form name="searchform" class="form u-search-form">
+            <i class="icon fas fa-search fa-fw"></i>
+            <input type="text" class="input u-search-input" placeholder="搜索" />
+          </form>
+        </div>
+      
+
+			<ul class='switcher h-list'>
+				
+					<li><a class="s-search flat-btn fas fa-search fa-fw" target="_self" href='javascript:void(0)'></a></li>
+				
+				<li><a class="s-menu flat-btn fas fa-bars fa-fw" target="_self" href='javascript:void(0)'></a></li>
+			</ul>
+		</div>
+	</div>
+</header>
+<ul class="menu-phone navigation white-box">
+  
+  
+    <li>
+      <a class="flat-box" href=/
+        
+        
+        
+          id="home"
+        >
+        
+          <i class='fas fa-rss fa-fw'></i>
+        
+        博客
+      </a>
+    </li>
+  
+    <li>
+      <a class="flat-box" href=/categories/
+        
+        
+        
+          id="categories"
+        >
+        
+          <i class='fas fa-folder-open fa-fw'></i>
+        
+        分类
+      </a>
+    </li>
+  
+    <li>
+      <a class="flat-box" href=/tags/
+        
+        
+        
+          id="tags"
+        >
+        
+          <i class='fas fa-tags fa-fw'></i>
+        
+        标签
+      </a>
+    </li>
+  
+    <li>
+      <a class="flat-box" href=/archives/
+        
+        
+        
+          id="archives"
+        >
+        
+          <i class='fas fa-archive fa-fw'></i>
+        
+        归档
+      </a>
+    </li>
+  
+    <li>
+      <a class="flat-box" href=/Collect
+        
+        
+        
+          id="Collect"
+        >
+        
+          <i class='fas fa-laptop-code fa-fw fa-fw'></i>
+        
+        项目
+      </a>
+    </li>
+  
+    <li>
+      <a class="flat-box" href=https://blog.dreamer.ga/docsify/#/
+        
+        
+        
+          id="https:blog.dreamer.gadocsify#"
+        >
+        
+          <i class='fas fa-book fa-fw fa-fw'></i>
+        
+        文档
+      </a>
+    </li>
+  
+    <li>
+      <a class="flat-box" href=/about/
+        
+        
+        
+          id="about"
+        >
+        
+          <i class='fas fa-info-circle fa-fw'></i>
+        
+        关于
+      </a>
+    </li>
+  
+</ul>
+<script>setLoadingBarProgress(40);</script>
+
+
+
+  <div class="l_body nocover">
+    <div class='body-wrapper'>
+      
+
+<div class='l_main'>
+  
+
+  
+    <article id="post" class="post white-box shadow article-type-post" itemscope itemprop="blogPost">
+      
+
+
+  <section class='meta'>
+    
+    
+    <div class="meta" id="header-meta">
+      
+        
+  
+    <h1 class="title">
+      <a href="/2020/04/22/centos7.7%E5%AE%89%E8%A3%85bind-9.11.4/">
+        Centos7.7安装bind-9.11.4
+      </a>
+    </h1>
+  
+
+
+      
+      <div class='new-meta-box'>
+        
+          
+        
+          
+            
+<div class='new-meta-item author'>
+  <a href="http://www.dreamer1103.tk" target="_blank" rel="nofollow noopener">
+    <img src="https://cdn.jsdelivr.net/gh/xiangyu1103/picgo/img/touxiang02.jpg">
+    <p>Dreamer</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/linux/' rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>linux</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-edit" aria-hidden="true"></i>
+    <p>发布于：2020年4月22日</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+      <section class="article typo">
+        <div class="article-entry" itemprop="articleBody">
+          
+          <img src="http://img.ymw.cn/52017121314000f821e4f.jpg" alt="avatar" style="zoom:150%;" />
+
+<a id="more"></a>
+
+<h5 id="一-基础环境准备"><a href="#一-基础环境准备" class="headerlink" title="一.基础环境准备"></a>一.基础环境准备</h5><p>1.1设置主机名</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hostnamectl <span class="built_in">set</span>-hostname jmds1-11.host.com   <span class="comment">#jmds1-11生产方式常用地点命名主机方式</span></span><br></pre></td></tr></table></figure>
+
+<p>1.2关闭防护墙和selinux</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">systemctl stop firewalld</span><br><span class="line">systemctl <span class="built_in">disable</span> firewalld</span><br><span class="line">setenforce 0</span><br><span class="line">sed –i ‘s/SELINUX=enforcing/SELINUX=disabled/g’ /etc/selinux/config</span><br></pre></td></tr></table></figure>
+
+<p>1.3设置网卡</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">cat /etc/sysconfig/network-scripts/ifcfg-eth0 </span><br><span class="line">TYPE=Ethernet</span><br><span class="line">BOOTPROTO=none</span><br><span class="line">NAME=eth0</span><br><span class="line">DEVICE=eth0</span><br><span class="line">ONBOOT=yes</span><br><span class="line">IPADDR=172.16.1.11</span><br><span class="line">NETMASK=255.255.255.0</span><br><span class="line">GATEWAY=172.16.1.254</span><br><span class="line">DNS1=172.16.1.254</span><br></pre></td></tr></table></figure>
+
+<p>1.4设置yum源和epel源</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">wget -O /etc/yum.repos.d/CentOS-Base.repo  http://mirrors.aliyun.com/repo/Centos-7.repo</span><br><span class="line">wget -O /etc/yum.repos.d/epel.repo  http://mirrors.aliyun.com/repo/epel-7.repo</span><br><span class="line">yum clean all</span><br><span class="line">yum makecache</span><br></pre></td></tr></table></figure>
+
+<p>1.5安装常用工具</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install wget net-tools telnet tree nmap sysstat lrzsz dos2unix <span class="built_in">bind</span>-utils -y</span><br></pre></td></tr></table></figure>
+
+<h5 id="二-安装bind服务"><a href="#二-安装bind服务" class="headerlink" title="二.安装bind服务"></a>二.安装bind服务</h5><p>2.1安装bind-9.11.4服务</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install <span class="built_in">bind</span> -y</span><br></pre></td></tr></table></figure>
+
+<p>2.2配置bind 9</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/named.conf                      <span class="comment">#配置主文件named.conf</span></span><br><span class="line">listen-on port 53 &#123; 172.16.1.11; &#125;; </span><br><span class="line">allow-query     &#123; any; &#125;;</span><br><span class="line">forwarders      &#123; 172.16.1.254; &#125;;      <span class="comment">#下一级DNS</span></span><br><span class="line">recursion yes;</span><br><span class="line">dnssec-enable no;</span><br><span class="line">dnssec-validation no</span><br><span class="line"><span class="comment">##############</span></span><br><span class="line">named-checkconf            <span class="comment">#检查named.conf文件语法</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/named.rfc1912.zones      <span class="comment">#配置域文件也可以在主文件里配置一样的</span></span><br><span class="line">zone <span class="string">"host.com"</span> IN &#123;             <span class="comment">#主机域</span></span><br><span class="line">        <span class="built_in">type</span>  master;</span><br><span class="line">        file  <span class="string">"host.com.zone"</span>;</span><br><span class="line">        allow-update &#123; 10.4.7.11; &#125;;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">zone <span class="string">"md.com"</span> IN &#123;               <span class="comment">#业务域MD市场部</span></span><br><span class="line">        <span class="built_in">type</span>  master;</span><br><span class="line">        file  <span class="string">"od.com.zone"</span>;</span><br><span class="line">        allow-update &#123; 10.4.7.11; &#125;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">cp -p /var/named/named.localhost /var/named/host.com.zone     <span class="comment">#模板拷贝两个域加-p保持属性</span></span><br><span class="line">cp -p /var/named/named.localhost /var/named/md.com.zone</span><br><span class="line">vim /var/named/host.com.zone</span><br><span class="line"><span class="variable">$TTL</span> 1D</span><br><span class="line">@   IN SOA  @ rname.invalid. (</span><br><span class="line">                    0   ; serial</span><br><span class="line">                    1D  ; refresh</span><br><span class="line">                    1H  ; retry</span><br><span class="line">                    1W  ; expire</span><br><span class="line">                    3H )    ; minimum</span><br><span class="line">    NS  @</span><br><span class="line">    A   172.16.1.11</span><br><span class="line">    AAAA    ::1</span><br><span class="line">jmds1-11 A 172.16.1.11</span><br><span class="line">jmds1-12 A 172.16.1.12</span><br><span class="line">jmds1-21 A 172.16.1.21</span><br><span class="line">jmds1-22 A 172.16.1.22</span><br><span class="line">jmds1-200 A 172.16.1.200</span><br><span class="line"></span><br><span class="line">vim /var/named/md.com.zone</span><br><span class="line"><span class="variable">$TTL</span> 1D</span><br><span class="line">@   IN SOA  @ rname.invalid. (</span><br><span class="line">                    0   ; serial</span><br><span class="line">                    1D  ; refresh</span><br><span class="line">                    1H  ; retry</span><br><span class="line">                    1W  ; expire</span><br><span class="line">                    3H )    ; minimum</span><br><span class="line">    NS  @</span><br><span class="line">    A   172.16.1.11</span><br><span class="line">    AAAA    ::1</span><br><span class="line"></span><br><span class="line">named-checkconf                                          <span class="comment">#检查主配置文件语法</span></span><br><span class="line">named-checkzone zone /var/named/host.com.zone            <span class="comment">#检查域配置文件语法</span></span><br><span class="line">zone zone/IN: loaded serial 0</span><br><span class="line">OK</span><br><span class="line">named-checkzone zone /var/named/md.com.zone</span><br><span class="line">zone zone/IN: loaded serial 0</span><br><span class="line">OK</span><br></pre></td></tr></table></figure>
+
+<p>2.3检查配置并启动bind 9</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">systemctl start named</span><br><span class="line">netstat -lntup|grep named</span><br><span class="line">dig -t A hdss7-11.host.com @10.4.7.11 +short</span><br><span class="line">ping jmds1-11</span><br><span class="line">PING jmds1-11.host.com (172.16.1.11) 56(84) bytes of data.</span><br><span class="line">64 bytes from jmds1-11.host.com (172.16.1.11): icmp_seq=1 ttl=64 time=0.006 ms</span><br><span class="line"></span><br><span class="line"><span class="comment">###如果systemctl start named启动不了报错，直接用 named -u named 可以启动，如果要习惯 systemctl restart named.service启动的话，注释掉下面文件一行</span></span><br><span class="line">vim /usr/lib/systemd/system/named.service</span><br><span class="line"><span class="comment">#ExecStartPre</span></span><br><span class="line"><span class="comment">#注释ExecStartPre 不检查 zone</span></span><br></pre></td></tr></table></figure>
+
+<p>2.4配置DNS客户端</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/sysconfig/network-scripts/ifcfg-eth0</span><br><span class="line">DNS1=172.16.1.11</span><br><span class="line"><span class="comment">##########</span></span><br><span class="line">vim /etc/resolv.conf</span><br><span class="line">search host.com</span><br><span class="line">nameserver 172.16.1.11</span><br><span class="line"><span class="comment">##########</span></span><br><span class="line">systemctl restart network</span><br></pre></td></tr></table></figure>
+
+<p>完成配置！！！</p>
+
+          
+            <br>
+            
+  
+    
+    
+
+<section class="widget copyright  desktop mobile">
+  <div class='content'>
+    
+      <blockquote>
+        
+          
+            <p>博客内容遵循 署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</p>
+
+          
+        
+          
+            <p>本文永久链接是：<a href=https://dreamer1103.github.io/2020/04/22/centos7.7%E5%AE%89%E8%A3%85bind-9.11.4/>https://dreamer1103.github.io/2020/04/22/centos7.7%E5%AE%89%E8%A3%85bind-9.11.4/</a></p>
+          
+        
+      </blockquote>
+    
+  </div>
+</section>
+
+  
+
+  
+    
+    
+
+<section class="widget qrcode  desktop mobile">
+  
+
+  <div class='content article-entry'>
+    
+      
+        <fancybox><img src='https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/qrcode/wiki_volantis.png'
+        
+          height='64px'
+        ></fancybox>
+      
+    
+      
+        <fancybox><img src='https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/qrcode/wiki_volantis.png'
+        
+          height='64px'
+        ></fancybox>
+      
+    
+  </div>
+</section>
+
+  
+
+
+          
+        </div>
+        
+          
+
+
+  <section class='meta' id="footer-meta">
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-04-22T11:51:24+08:00">
+  <a class='notlink'>
+    <i class="fas fa-save" aria-hidden="true"></i>
+    <p>更新于：2020年4月22日</p>
+  </a>
+</div>
+
+        
+      
+        
+          
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/linux/" rel="nofollow"><i class="fas fa-hashtag" aria-hidden="true"></i><p>linux</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/k8s/" rel="nofollow"><i class="fas fa-hashtag" aria-hidden="true"></i><p>k8s</p></a></div>
+
+
+        
+      
+        
+          
+
+        
+      
+        
+          
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
+    
+      
+        <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer"
+          
+          href="http://connect.qq.com/widget/shareqq/index.html?url=https://dreamer1103.github.io/2020/04/22/centos7.7%E5%AE%89%E8%A3%85bind-9.11.4/&title=Centos7.7安装bind-9.11.4 - DREAMER&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/qq.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer"
+          
+          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dreamer1103.github.io/2020/04/22/centos7.7%E5%AE%89%E8%A3%85bind-9.11.4/&title=Centos7.7安装bind-9.11.4 - DREAMER&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/qzone.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer"
+          
+          href="http://service.weibo.com/share/share.php?url=https://dreamer1103.github.io/2020/04/22/centos7.7%E5%AE%89%E8%A3%85bind-9.11.4/&title=Centos7.7安装bind-9.11.4 - DREAMER&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/weibo.png">
+          
+        </a>
+      
+    
+  </div>
+</div>
+
+
+
+        
+      
+    </div>
+  </section>
+
+
+        
+        
+          <div class="prev-next">
+            
+            
+              <a class='next' href='/2020/04/21/Centos7%20%E4%BF%AE%E6%94%B9%E7%BD%91%E5%8D%A1%E4%B8%BAeth0/'>
+                <p class='title'>Centos7 修改网卡为eth0<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+                <p class='content'>默认centos7安装不设置内核版本，会影响网卡的名称。所以为了我们统一管理我们需要将网卡名称修改为eth开头
+第一步查看服务器版本12[root@localhost ~]# cat &#x2F...</p>
+              </a>
+            
+          </div>
+        
+      </section>
+    </article>
+  
+
+  
+    <!-- 显示推荐文章和评论 -->
+
+
+
+  <article class="post white-box comments shadow">
+    <section class="article typo">
+      <p ct><i class='fas fa-comments'></i> 评论</p>
+      
+      
+      
+      
+      
+        <section id="comments">
+          <div id="valine_container" class="valine_thread">
+            <i class="fas fa-spinner fa-spin fa-fw"></i>
+          </div>
+        </section>
+      
+    </section>
+  </article>
+
+
+  
+
+
+
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<!-- MathJax配置，可通过单美元符号书写行内公式等 -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    "HTML-CSS": {
+      preferredFont: "TeX",
+      availableFonts: ["STIX","TeX"],
+      linebreaks: { automatic:true },
+      EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+      inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+      processEscapes: true,
+      ignoreClass: "tex2jax_ignore|dno",
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: { autoNumber: "AMS" },
+      noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+      Macros: { href: "{}" }
+    },
+    messageStyle: "none"
+  });
+</script>
+<!-- 给MathJax元素添加has-jax class -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += (all[i].SourceElement().parentNode.className ? ' ' : '') + 'has-jax';
+    }
+  });
+</script>
+
+
+
+
+  <script>
+    window.subData = {
+      title: 'Centos7.7安装bind-9.11.4',
+      tools: true
+    }
+  </script>
+
+
+</div>
+<aside class='l_side'>
+  
+  
+    
+    
+
+<section class="widget qrcode shadow desktop">
+  
+  <header>
+    
+      <i class="fas fa-mobile fa-fw" aria-hidden="true"></i><span class='name'>手机观看</span>
+    
+  </header>
+
+
+  <div class='content article-entry'>
+    
+      
+        <img src='https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/qrcode/wiki_volantis.png'
+        >
+      
+    
+  </div>
+</section>
+
+  
+
+  
+    
+    
+
+
+  <section class="widget toc-wrapper shadow desktop mobile">
+    
+  <header>
+    
+      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>本文目录</span>
+    
+  </header>
+
+
+    <div class='content'>
+      <ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#一-基础环境准备"><span class="toc-text">一.基础环境准备</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#二-安装bind服务"><span class="toc-text">二.安装bind服务</span></a></li></ol>
+    </div>
+  </section>
+
+
+  
+
+
+</aside>
+
+
+  
+  <footer class="clearfix ">
+    <br><br>
+    
+      
+        <div class="aplayer-container">
+          
+
+  
+    <meting-js
+      theme='#1BCDFC'
+      autoplay='false'
+      volume='0.7'
+      loop='all'
+      order='list'
+      fixed='false'
+      list-max-height='340px'
+      server='netease'
+      type='playlist'
+      id='3175833810'
+      list-folded='true'>
+    </meting-js>
+  
+
+
+        </div>
+      
+    
+      
+        <br>
+        <div class="social-wrapper">
+          
+            
+              <a href="/atom.xml"
+                class="social fas fa-rss flat-btn"
+                target="_blank"
+                rel="external nofollow noopener noreferrer">
+              </a>
+            
+          
+            
+              <a href="mailto:me@xaoxuu.com"
+                class="social fas fa-envelope flat-btn"
+                target="_blank"
+                rel="external nofollow noopener noreferrer">
+              </a>
+            
+          
+            
+              <a href="https://github.com/xaoxuu"
+                class="social fab fa-github flat-btn"
+                target="_blank"
+                rel="external nofollow noopener noreferrer">
+              </a>
+            
+          
+            
+              <a href="https://music.163.com/#/user/home?id=63035382"
+                class="social fas fa-headphones-alt flat-btn"
+                target="_blank"
+                rel="external nofollow noopener noreferrer">
+              </a>
+            
+          
+        </div>
+      
+    
+      
+        <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+</div>
+      
+    
+      
+        本站使用
+        <a href="https://www.dreamer1103.tk/" target="_blank" class="codename">Dreamer</a>
+        作为主题
+        
+          ，
+          总访问量为
+          <span id="busuanzi_value_site_pv"><i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span>
+          次
+        
+      
+    
+      
+        <div class='copyright'>
+        <p><a href="https://xaoxuu.com" target="_blank" rel="noopener">Copyright © 2017-2020 Mr. X</a></p>
+
+        </div>
+      
+    
+  </footer>
+
+<script>setLoadingBarProgress(80);</script>
+
+
+      <script>setLoadingBarProgress(60);</script>
+    </div>
+    <a class="s-top fas fa-arrow-up fa-fw" href='javascript:void(0)'></a>
+  </div>
+  
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.3/dist/jquery.min.js"></script>
+
+
+  <script>
+    
+    var SEARCH_SERVICE = "hexo" || "hexo";
+    var ROOT = "/" || "/";
+    if (!ROOT.endsWith('/')) ROOT += '/';
+  </script>
+
+
+  <script async src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2/js/instant_page.js" type="module" defer integrity="sha384-OeDn4XE77tdHo8pGtE1apMPmAipjoxUQ++eeJa6EtJCfHlvijigWiJpD7VDPWXV1"></script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.js" async></script>
+
+  <script type="text/javascript">
+    $(function() {
+      Waves.attach('.flat-btn', ['waves-button']);
+      Waves.attach('.float-btn', ['waves-button', 'waves-float']);
+      Waves.attach('.float-btn-light', ['waves-button', 'waves-float', 'waves-light']);
+      Waves.attach('.flat-box', ['waves-block']);
+      Waves.attach('.float-box', ['waves-block', 'waves-float']);
+      Waves.attach('.waves-image');
+      Waves.init();
+    });
+  </script>
+
+
+  <script async src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-busuanzi@2.3/js/busuanzi.pure.mini.js"></script>
+
+
+
+  
+  
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/jquery-backstretch@2.1.18/jquery.backstretch.min.js"></script>
+
+    <script type="text/javascript">
+      $(function(){
+        var imgs=["https://cdn.jsdelivr.net/gh/xaoxuu/cdn-wallpaper/abstract/41F215B9-261F-48B4-80B5-4E86E165259E.jpeg"];
+        if ('true' == 'true') {
+          function shuffle(arr){
+            /*From countercurrent-time*/
+            var n = arr.length;
+            while(n--) {
+              var index = Math.floor(Math.random() * n);
+              var temp = arr[index];
+              arr[index] = arr[n];
+              arr[n] = temp;
+            }
+          }
+          shuffle(imgs);
+        }
+        if ('.cover') {
+          $('.cover').backstretch(
+            imgs,
+          {
+            duration: "20000",
+            fade: "1500"
+          });
+        } else {
+          $.backstretch(
+            imgs,
+          {
+            duration: "20000",
+            fade: "1500"
+          });
+        }
+      });
+    </script>
+  
+
+
+
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/aplayer@1.10/dist/APlayer.min.js" async></script>
+
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/meting@2.0/dist/Meting.min.js" async></script>
+
+  
+
+
+
+
+
+
+
+
+  
+    
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2.0/js/valine.js"></script>
+
+  
+  <script>
+  var GUEST_INFO = ['nick','mail','link'];
+  var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+    return GUEST_INFO.indexOf(item) > -1
+  });
+  var notify = 'true' == true;
+  var verify = 'true' == true;
+  var valine = new Valine();
+  valine.init({
+    el: '#valine_container',
+    notify: notify,
+    verify: verify,
+    guest_info: guest_info,
+    
+    appId: "yRrWxdm60ya2scYz7h6mjamr-gzGzoHsz",
+    appKey: "9s7yETi1nLzx2hQ0OhE6508X",
+    placeholder: "快来评论吧~",
+    pageSize:'10',
+    avatar:'mp',
+    lang:'zh-cn',
+    visitor: 'false',
+    highlight:'true'
+  })
+  </script>
+
+
+
+  
+<script src="/js/app.js"></script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2.1/js/search.js"></script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2/js/comment_typing.js"></script>
+
+
+
+<!-- 复制 -->
+
+  <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  /*页面载入完成后，创建复制按钮*/
+  !function (e, t, a) {
+    /* code */
+    function on_success(){
+      let $btn = $('.highlight .code pre');
+      console.log($btn);
+    }
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="fas fa-copy"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copyed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('fa-copy');
+        $icon.addClass('fa-clipboard-check');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPYED';
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('fa-copy');
+        $icon.addClass('fa-exclamation-triangle');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+
+
+<!-- fancybox -->
+
+  <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script>
+  let LAZY_LOAD_IMAGE = "";
+  $(".article-entry").find("fancybox").find("img").each(function () {
+      var element = document.createElement("a");
+      $(element).attr("data-fancybox", "gallery");
+      $(element).attr("href", $(this).attr("src"));
+      /* 图片采用懒加载处理时,
+       * 一般图片标签内会有个属性名来存放图片的真实地址，比如 data-original,
+       * 那么此处将原本的属性名src替换为对应属性名data-original,
+       * 修改如下
+       */
+       if (LAZY_LOAD_IMAGE) {
+         $(element).attr("href", $(this).attr("data-original"));
+       }
+      $(this).wrap(element);
+  });
+</script>
+
+
+
+
+
+
+  <script>setLoadingBarProgress(100);</script>
+</body>
+</html>

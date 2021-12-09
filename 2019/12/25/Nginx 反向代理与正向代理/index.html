@@ -1,0 +1,1182 @@
+<!DOCTYPE html>
+<html>
+<head hexo-theme='https://volantis.js.org/#2.1.2'>
+  <meta charset="utf-8">
+  <!-- SEO相关 -->
+  
+    
+  
+  <!-- 渲染优化 -->
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <!-- 页面元数据 -->
+  
+    <title>Nginx反向代理与正向代理 - DREAMER</title>
+  
+    <meta name="keywords" content="nginx">
+  
+  
+    <meta name="description" content="Nginx反向代理与正向代理">
+  
+
+  <!-- feed -->
+  
+
+  <!-- import meta -->
+  
+
+  <!-- link -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css">
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.css">
+
+  
+
+  
+
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10/dist/APlayer.min.css">
+  
+
+  <!-- import link -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/style.css">
+
+  
+
+  <script>
+    function setLoadingBarProgress(num) {
+      document.getElementById('loading-bar').style.width=num+"%";
+    }
+  </script>
+
+  
+  
+</head>
+
+<body>
+  
+  <div id="loading-bar-wrapper">
+  <div id="loading-bar"></div>
+</div>
+<header class="l_header shadow blur">
+
+  <div class='wrapper'>
+    <div class='nav-sub container--flex'>
+      <a class="logo flat-box"></a>
+      <ul class='switcher h-list'>
+        <li><a class="s-comment flat-btn fas fa-comments fa-fw" target="_self" href='javascript:void(0)'></a></li>
+        
+          <li><a class="s-toc flat-btn fas fa-list fa-fw" target="_self" href='javascript:void(0)'></a></li>
+        
+      </ul>
+    </div>
+		<div class="nav-main container container--flex">
+      
+        
+        <a class="logo flat-box" target="_self" href='/'>
+          
+          
+          
+          
+            DREAMER <b><sup style='color:#3AA757'>2.1.2</sup></b>
+          
+        </a>
+      
+
+			<div class='menu navigation'>
+				<ul class='h-list'>
+          
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/
+                  
+                  
+                  
+                    id="home"
+                  >
+                  
+                    <i class='fas fa-clock fa-fw fa-fw'></i>
+                  
+                  近期
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" 
+                  
+                  
+                  >
+                  
+                    <i class='fas fa-list-alt fa-fw fa-fw'></i>
+                  
+                  索引
+                </a>
+                
+                  <ul class="submenu">
+                    
+                      
+            
+              <li>
+                <a class="flat-box" href=/categories/
+                  
+                  
+                  
+                    id="categories"
+                  >
+                  
+                    <i class='fas fa-folder-open fa-fw'></i>
+                  
+                  文章分类
+                </a>
+                
+              </li>
+            
+          
+                    
+                      
+            
+              <li>
+                <a class="flat-box" href=/tags/
+                  
+                  
+                  
+                    id="tags"
+                  >
+                  
+                    <i class='fas fa-tags fa-fw'></i>
+                  
+                  所有标签
+                </a>
+                
+              </li>
+            
+          
+                    
+                      
+            
+              <li>
+                <a class="flat-box" href=/archives/
+                  
+                  
+                  
+                    id="archives"
+                  >
+                  
+                    <i class='fas fa-archive fa-fw'></i>
+                  
+                  时光轴
+                </a>
+                
+              </li>
+            
+          
+                    
+                  </ul>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/Collect
+                  
+                  
+                  
+                    id="Collect"
+                  >
+                  
+                    <i class='fas fa-laptop-code fa-fw fa-fw'></i>
+                  
+                  项目
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/about
+                  
+                  
+                  
+                    id="about"
+                  >
+                  
+                    <i class='fas fa-info-circle fa-fw'></i>
+                  
+                  关于
+                </a>
+                
+                  <ul class="submenu">
+                    
+                      
+            
+              <li>
+                <a class="flat-box" href=http://reusme.dreamer1103.tk/
+                  
+                  
+                  
+                    id="http:reusme.dreamer1103.tk"
+                  >
+                  
+                    <i class='fas fa-folder-open fa-fw'></i>
+                  
+                  个人简历
+                </a>
+                
+              </li>
+            
+          
+                    
+                      
+            
+              <li>
+                <a class="flat-box" href=/friends/
+                  
+                  
+                  
+                    id="friends"
+                  >
+                  
+                    <i class='fas fa-link fa-fw'></i>
+                  
+                  友链
+                </a>
+                
+              </li>
+            
+          
+                    
+                  </ul>
+                
+              </li>
+            
+          
+          
+				</ul>
+			</div>
+
+      
+        <div class="m_search">
+          <form name="searchform" class="form u-search-form">
+            <i class="icon fas fa-search fa-fw"></i>
+            <input type="text" class="input u-search-input" placeholder="搜索" />
+          </form>
+        </div>
+      
+
+			<ul class='switcher h-list'>
+				
+					<li><a class="s-search flat-btn fas fa-search fa-fw" target="_self" href='javascript:void(0)'></a></li>
+				
+				<li><a class="s-menu flat-btn fas fa-bars fa-fw" target="_self" href='javascript:void(0)'></a></li>
+			</ul>
+		</div>
+	</div>
+</header>
+<ul class="menu-phone navigation white-box">
+  
+  
+    <li>
+      <a class="flat-box" href=/
+        
+        
+        
+          id="home"
+        >
+        
+          <i class='fas fa-rss fa-fw'></i>
+        
+        博客
+      </a>
+    </li>
+  
+    <li>
+      <a class="flat-box" href=/categories/
+        
+        
+        
+          id="categories"
+        >
+        
+          <i class='fas fa-folder-open fa-fw'></i>
+        
+        分类
+      </a>
+    </li>
+  
+    <li>
+      <a class="flat-box" href=/tags/
+        
+        
+        
+          id="tags"
+        >
+        
+          <i class='fas fa-tags fa-fw'></i>
+        
+        标签
+      </a>
+    </li>
+  
+    <li>
+      <a class="flat-box" href=/archives/
+        
+        
+        
+          id="archives"
+        >
+        
+          <i class='fas fa-archive fa-fw'></i>
+        
+        归档
+      </a>
+    </li>
+  
+    <li>
+      <a class="flat-box" href=/Collect
+        
+        
+        
+          id="Collect"
+        >
+        
+          <i class='fas fa-laptop-code fa-fw fa-fw'></i>
+        
+        项目
+      </a>
+    </li>
+  
+    <li>
+      <a class="flat-box" href=https://blog.dreamer.ga/docsify/#/
+        
+        
+        
+          id="https:blog.dreamer.gadocsify#"
+        >
+        
+          <i class='fas fa-book fa-fw fa-fw'></i>
+        
+        文档
+      </a>
+    </li>
+  
+    <li>
+      <a class="flat-box" href=/about/
+        
+        
+        
+          id="about"
+        >
+        
+          <i class='fas fa-info-circle fa-fw'></i>
+        
+        关于
+      </a>
+    </li>
+  
+</ul>
+<script>setLoadingBarProgress(40);</script>
+
+
+
+  <div class="l_body nocover">
+    <div class='body-wrapper'>
+      
+
+<div class='l_main'>
+  
+
+  
+    <article id="post" class="post white-box shadow article-type-post" itemscope itemprop="blogPost">
+      
+
+
+  <section class='meta'>
+    
+    
+    <div class="meta" id="header-meta">
+      
+        
+  
+    <h1 class="title">
+      <a href="/2019/12/25/Nginx%20%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E4%B8%8E%E6%AD%A3%E5%90%91%E4%BB%A3%E7%90%86/">
+        Nginx反向代理与正向代理
+      </a>
+    </h1>
+  
+
+
+      
+      <div class='new-meta-box'>
+        
+          
+        
+          
+            
+<div class='new-meta-item author'>
+  <a href="" rel="nofollow">
+    <img src="">
+    <p></p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/nginx/' rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>nginx</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-edit" aria-hidden="true"></i>
+    <p>发布于：2019年12月25日</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+      <section class="article typo">
+        <div class="article-entry" itemprop="articleBody">
+          
+            <fancybox><img src='https://cdn.jsdelivr.net/gh/xiangyu1103/picgo/img/miao02.jpg'/></fancybox>
+          
+          <h1 id="Nginx-反向代理与正向代理"><a href="#Nginx-反向代理与正向代理" class="headerlink" title="Nginx 反向代理与正向代理"></a>Nginx 反向代理与正向代理</h1><p>代理分为正向代理和反向代理,本次就来演示一下Nginx配置正向代理和反向代理的场景。 顺便讲解一下正向代理和反向代理的区别正向代理和反向代理的区别</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Nginx</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p><strong>首先，我们需要知道什么是反向代理和正向代理区别</strong></p>
+<h3 id="一、正向代理"><a href="#一、正向代理" class="headerlink" title="一、正向代理"></a>一、正向代理</h3><p><img src="http://static.zybuluo.com/abcdocker/ztwey8ruapp2ykog030x2tw7/image_1dc4a1othlvj1668rh21i53b649.png" alt="image_1dc4a1othlvj1668rh21i53b649.png-103.3kB"></p>
+<blockquote>
+<p>正向代理简单的来说就是我们的代理服务器代替用户去请求后端节点</p>
+</blockquote>
+<blockquote>
+<p>nginx正向代理代替工具还有goproxy</p>
+</blockquote>
+<p><strong>为什么要使用正向代理</strong></p>
+<ul>
+<li><strong>用户无法直接访问服务器B</strong> （常见例子就是我们使用的<a href="https://i4t.com/category/shadowsocks" target="_blank" rel="noopener">Shadowsocks</a>）</li>
+</ul>
+<p><img src="http://static.zybuluo.com/abcdocker/5i3utwbs1bxvkqizf7jdptp1/image_1dc4e8hpa1hkod3fnm361n12tkm.png" alt="image_1dc4e8hpa1hkod3fnm361n12tkm.png-99.6kB"></p>
+<ul>
+<li><strong>Cache缓存作用</strong></li>
+</ul>
+<p>cache缓存技术和代理服务技术是紧密联系的（不只是正向代理使用cache缓存，反向代理同时也使用缓存）简单的来说就是用户A访问了<code>代理服务器</code>，那么代理服务器会将用户A的数据保存一段时间，如果该时间段呢用户B同时也访问了<code>代理服务器</code>，那么代理服务器将不会直接请求服务器B，而是直接将缓存直接返回给用户A</p>
+<ul>
+<li><strong>拦截访问</strong></li>
+</ul>
+<p><img src="http://static.zybuluo.com/abcdocker/arq8pe15o6o2i589t8pqfuof/image_1dc4f02k58jntf9qcplhe1e6g1g.png" alt="image_1dc4f02k58jntf9qcplhe1e6g1g.png-54.7kB"></p>
+<p>假设用户A和用户B都设置了代理服务器，用户A允许访问互联网，而用户B不允许防火互联网（这个代理服务器Z上做限制）这样用户A因为授权，可以通过代理服务器访问到服务器C，而用户B因为没有被代理服务器授权时，数据包会直接丢弃</p>
+<ul>
+<li><strong>隐藏访问者</strong></li>
+</ul>
+<p><img src="http://static.zybuluo.com/abcdocker/ydr1ji2uwnwtiqhu3d3mx7cn/image_1dc4f9h94v6lmr614kpcqhmp32a.png" alt="image_1dc4f9h94v6lmr614kpcqhmp32a.png-35.7kB"></p>
+<p>我们可以看出服务器C并不知道访问自己的实际是用户A，因为代理服务器Z代替用户A去直接与服务器C进行交互，如果代理服务器Z完全被用户A控制（或不完全控制）会惯以<code>肉鸡</code>术语称呼</p>
+<ul>
+<li><strong>正向代理总结</strong></li>
+</ul>
+<p>正向代理是一个位于客户端和原始服务器(origin server)之前的服务器，为了从原始服务器获取内容，客户端向代理发送一个请求并指定目标，然后代理服务器向原始服务器转交请求并将获得的内容返回给客户端。客户端必须设置正向代理服务器。（类似于我们的<a href="https://i4t.com/category/shadowsocks" target="_blank" rel="noopener">ss服务</a>）</p>
+<h3 id="二、反向代理"><a href="#二、反向代理" class="headerlink" title="二、反向代理"></a>二、反向代理</h3><p>反向代理正好与正向代理相反，对于客户端而言代理服务器就像是原始服务器，并且客户端不需要进行任何特别的设置。客户端向反向代理发送普通请求，接着反向代理将判断向何处(后端节点)转交请求，并将获得的内容返回给客户端</p>
+<blockquote>
+<p>通常的代理服务器，只用于代理内部网络对Internet的连接请求，客户机必须指定代理服务器，并将本来要直接发送到Web服务器上的http请求发送到代理服务器中，当一个代理服务器能够代理外部网络上的主机，访问内部网络时，这种代理服务的方式成为反向代理服务</p>
+</blockquote>
+<p><img src="http://static.zybuluo.com/abcdocker/dvkjbg2nqgwrqqpturqvh1ht/image_1dc4ggusp1acf1vnr19nd1jfr161j2n.png" alt="image_1dc4ggusp1acf1vnr19nd1jfr161j2n.png-86.3kB"></p>
+<ul>
+<li>透明代理</li>
+</ul>
+<p>透明代理的意思是客户端根本不需要指定有代理服务器的存在，改变你的<code>request fields</code>(报文)，并会传送真实IP，注意加密的透明代理则属于匿名代理，意思是不用设置代理了。透明代理实践的例子就是很多公司所使用的行为管理软件</p>
+<p><img src="http://static.zybuluo.com/abcdocker/x8ipxuog91w448rf0xqgfb59/image_1dc4h8g9ppsnavbfbp1kk01iim34.png" alt="image_1dc4h8g9ppsnavbfbp1kk01iim34.png-72.5kB"></p>
+<p>当用户A和用户B并不知道行为管理设备充当透明代理行为，用户A或者用户B向服务器A或者服务器B提交请求的时候，透明代理设备根据自身策略拦截并修改用户A或B的报文，并作为实际的请求方，向服务器A或者B发送请求，当接受信息回传，透明代理再根据自身的设置把允许的保存发回至用户A或B，<strong>如果透明代理设置不允许访问服务器B，那么用户A或者用户B就不会得到服务器B的数据</strong></p>
+<h2 id="三、正向代理配置测试"><a href="#三、正向代理配置测试" class="headerlink" title="三、正向代理配置测试"></a>三、正向代理配置测试</h2><p><strong>我们使用nginx代理上网为例子进行演示nginx正向代理</strong></p>
+<p>下载并安装nginx (正向代理不需要单独的模块)</p>
+<p><img src="http://static.zybuluo.com/abcdocker/k7mcvff4rso5ib367xfmr6dn/123.png" alt="123.png-159.3kB"></p>
+<p><strong>我们使用2台服务器都进行如下操作</strong></p>
+<p>10.4.82.140 tomcat.i4t.com 为后端应用服务(域名为tomcat.i4t.com)</p>
+<p>10.4.82.142 nginx.i4t.com 为代理服务器(域名为nginx.i4t.com)</p>
+<blockquote>
+<p><strong>请仔细阅读本段</strong> 首先我们代理服务器几乎不进行任何配置，只是一个普通的nginx代理，所有修改nginx的配置都是在代理服务器上添加</p>
+</blockquote>
+<p>两台nginx默认配置如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">1.nginx版本没有太大要求</span><br><span class="line">wget http:&#x2F;&#x2F;nginx.org&#x2F;download&#x2F;nginx-1.10.3.tar.gz</span><br><span class="line"></span><br><span class="line">#按照依赖包</span><br><span class="line">yum install -y gcc glibc gcc-c++ prce-devel openssl-devel pcre-devel</span><br><span class="line">useradd -s &#x2F;sbin&#x2F;nologin nginx -M </span><br><span class="line">tar xf nginx-1.10.3.tar.gz &amp;&amp; cd nginx-1.10.3</span><br><span class="line"></span><br><span class="line">#编译</span><br><span class="line">.&#x2F;configure --prefix&#x3D;&#x2F;usr&#x2F;local&#x2F;nginx-1.10.3 --user&#x3D;nginx --group&#x3D;nginx --with-http_ssl_module --with-http_stub_status_module</span><br><span class="line"></span><br><span class="line">检查</span><br><span class="line">&#x2F;usr&#x2F;loca&#x2F;nginx&#x2F;sbin&#x2F;nginx -t</span><br><span class="line"></span><br><span class="line">启动</span><br><span class="line">&#x2F;usr&#x2F;local&#x2F;nginx&#x2F;sbin&#x2F;nginx</span><br><span class="line"></span><br><span class="line">查看服务器是否启动</span><br><span class="line">netstat -lntp|grep nginx</span><br><span class="line">    tcp        0      0 0.0.0.0:80              0.0.0.0:*               LISTEN      7058&#x2F;nginx: master</span><br></pre></td></tr></table></figure>
+
+<p>接下来是配置nginx代理</p>
+<p><strong>首先我们先配置2台nginx服务器</strong></p>
+<p>1.先配置<code>nginx.i4t.com</code> nginx信息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">#配置10.4.82.142 后端服务器</span><br><span class="line">cat &#x2F;usr&#x2F;local&#x2F;nginx&#x2F;conf&#x2F;nginx.conf</span><br><span class="line">user  nginx;</span><br><span class="line">worker_processes  1;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">events &#123;</span><br><span class="line">    worker_connections  1024;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">http &#123;</span><br><span class="line">    include       mime.types;</span><br><span class="line">    default_type  application&#x2F;octet-stream;</span><br><span class="line"></span><br><span class="line">    log_format  main  &#39;$remote_addr - $remote_user [$time_local] &quot;$request&quot; &#39;</span><br><span class="line">                      &#39;$status $body_bytes_sent &quot;$http_referer&quot; &#39;</span><br><span class="line">                      &#39;&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;&#39;;</span><br><span class="line">    access_log  logs&#x2F;access.log  main;</span><br><span class="line"></span><br><span class="line">    sendfile        on;</span><br><span class="line">    tcp_nopush     on;</span><br><span class="line">    keepalive_timeout  65;</span><br><span class="line"></span><br><span class="line">    gzip  on;</span><br><span class="line"></span><br><span class="line">    server &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        listen       80;</span><br><span class="line">        server_name  nginx.i4t.com;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        location &#x2F; &#123;</span><br><span class="line">        root   &#x2F;usr&#x2F;local&#x2F;nginx&#x2F;html;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">echo &quot;nginx.i4t.com&quot; &gt;&#x2F;usr&#x2F;local&#x2F;nginx&#x2F;html&#x2F;index.html</span><br><span class="line"></span><br><span class="line">&#x2F;usr&#x2F;local&#x2F;nginx&#x2F;sbin&#x2F;nginx -s reload</span><br></pre></td></tr></table></figure>
+
+<p>此时nginx.i4t.com域名访问如下</p>
+<p><img src="http://static.zybuluo.com/abcdocker/f5m5ptxz4c9m0mkt3ypa48md/image_1dc6fqsem48edhv13e3ill19k1s.png" alt="image_1dc6fqsem48edhv13e3ill19k1s.png-26.3kB"></p>
+<p><strong>接下来配置后端服务器</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">代理服务器默认配置</span><br><span class="line">10.4.82.140</span><br></pre></td></tr></table></figure>
+
+<p>以下是后端服务器默认配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">user  nginx;</span><br><span class="line">worker_processes  1;</span><br><span class="line"></span><br><span class="line">events &#123;</span><br><span class="line">    worker_connections  1024;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">http &#123;</span><br><span class="line">    include       mime.types;</span><br><span class="line">    default_type  application&#x2F;octet-stream;</span><br><span class="line"></span><br><span class="line">    log_format  main  &#39;$remote_addr - $remote_user [$time_local] &quot;$request&quot; &#39;</span><br><span class="line">                      &#39;$status $body_bytes_sent &quot;$http_referer&quot; &#39;</span><br><span class="line">                      &#39;&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;&#39;;</span><br><span class="line"></span><br><span class="line">    access_log  logs&#x2F;access.log  main;</span><br><span class="line"></span><br><span class="line">    sendfile        on;</span><br><span class="line">    keepalive_timeout  65;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    server &#123;</span><br><span class="line">        listen       80;</span><br><span class="line">        server_name  tomcat.i4t.com;</span><br><span class="line"></span><br><span class="line">        location &#x2F; &#123;</span><br><span class="line">            root   html;</span><br><span class="line">            index  index.html index.htm;</span><br><span class="line">        &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"> echo &quot; tomcat.i4t.com&quot; &gt;&#x2F;usr&#x2F;local&#x2F;nginx&#x2F;html&#x2F;index.html</span><br><span class="line"> &#x2F;usr&#x2F;local&#x2F;nginx&#x2F;sbin&#x2F;nginx  -s reload</span><br></pre></td></tr></table></figure>
+
+<p>tomcat.i4t.com后端服务器的访问内容如下</p>
+<p><img src="http://static.zybuluo.com/abcdocker/fnpyhyzmrexcehbsyn50ja1p/12333.png" alt="12333.png-64.7kB"></p>
+<p>接下来我们将<code>tomcat.i4t.com 也就是10.4.82.140</code>进行配置权限</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">#只允许10.4.82.142访问</span><br><span class="line">cat &#x2F;usr&#x2F;local&#x2F;nginx&#x2F;conf&#x2F;nginx.conf</span><br><span class="line">user  nginx;</span><br><span class="line">worker_processes  1;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">events &#123;</span><br><span class="line">    worker_connections  1024;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">http &#123;</span><br><span class="line">    include       mime.types;</span><br><span class="line">    default_type  application&#x2F;octet-stream;</span><br><span class="line"></span><br><span class="line">    log_format  main  &#39;$remote_addr - $remote_user [$time_local] &quot;$request&quot; &#39;</span><br><span class="line">                      &#39;$status $body_bytes_sent &quot;$http_referer&quot; &#39;</span><br><span class="line">                      &#39;&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;&#39;;</span><br><span class="line">    access_log  logs&#x2F;access.log  main;</span><br><span class="line"></span><br><span class="line">    sendfile        on;</span><br><span class="line">    tcp_nopush     on;</span><br><span class="line">    keepalive_timeout  65;</span><br><span class="line"></span><br><span class="line">    gzip  on;</span><br><span class="line"></span><br><span class="line">    server &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        listen       80;</span><br><span class="line">        server_name  tomcat.i4t.com;</span><br><span class="line"></span><br><span class="line">        resolver 8.8.8.8;</span><br><span class="line">        location &#x2F; &#123;</span><br><span class="line">        proxy_pass $scheme:&#x2F;&#x2F;$host$request_uri;</span><br><span class="line">        if ( $remote_addr !~* &quot;10.4.82.142&quot;) &#123;</span><br><span class="line">            return 403;</span><br><span class="line">        &#125;</span><br><span class="line">        root   &#x2F;usr&#x2F;local&#x2F;nginx&#x2F;html;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#proxy_pass $scheme:&#x2F;&#x2F;$host（请求的域名）$request_uri; 域名后面参数</span><br><span class="line">#resolver DNS地址，可以不写</span><br></pre></td></tr></table></figure>
+
+<p>我们可以看到我们现在电脑已经无法访问tomcat.i4t.com，需要注意的是，我们只是修改了tomcat.i4t.com的代理，nginx.i4t.com依旧可以正常访问的</p>
+<p><img src="http://static.zybuluo.com/abcdocker/pscsrg674ms1pr355tl5alvy/image_1dc6g35vq1v2a94i1q141pvk1q923l.png" alt="image_1dc6g35vq1v2a94i1q141pvk1q923l.png-39kB"></p>
+<p>现在我们进行代理配置</p>
+<ul>
+<li>windows配置如下</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">IE--&gt;Internet选项--&gt;连接--&gt;局域网设置--&gt;代理服务器</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://static.zybuluo.com/abcdocker/93z8mmryw5upkgiwvctdgrf0/image_1dc6h8d211sg518nj1vrc1etapah42.png" alt="image_1dc6h8d211sg518nj1vrc1etapah42.png-246.7kB"></p>
+<ul>
+<li>mac设置如下</li>
+</ul>
+<p><img src="http://static.zybuluo.com/abcdocker/dbnux7j8m6hkscmkzh9crhkc/image_1dc6haibh11471s8jcod1fv9eh94f.png" alt="image_1dc6haibh11471s8jcod1fv9eh94f.png-99.4kB"></p>
+<p><img src="http://static.zybuluo.com/abcdocker/6yqgx71ay61fw0mwld231zfh/image_1dc6hbavagmtog91a231ee12t64s.png" alt="image_1dc6hbavagmtog91a231ee12t64s.png-91.3kB"></p>
+<ul>
+<li>Linux</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export http_proxy&#x3D;http:&#x2F;&#x2F;10.4.82.142:80</span><br><span class="line">wget http:&#x2F;&#x2F;tomcat.i4t.com</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://static.zybuluo.com/abcdocker/su4ykm4xjt6r40slu6ui76b6/3333.png" alt="3333.png-351.1kB"></p>
+<p><strong>这时候我们访问tomcat.i4t.com就是200，状态</strong></p>
+<p><img src="http://static.zybuluo.com/abcdocker/k5tpjx98l0auad3da9g8bvga/image_1dc6hdijka551kb51q821p3m1t9r59.png" alt="image_1dc6hdijka551kb51q821p3m1t9r59.png-30.7kB"></p>
+<h2 id="四、反向代理配置测试"><a href="#四、反向代理配置测试" class="headerlink" title="四、反向代理配置测试"></a>四、反向代理配置测试</h2><p>安装和上面编译安装一样，没有特殊模块。只需要修改配置文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">cat &#x2F;usr&#x2F;local&#x2F;nginx&#x2F;conf&#x2F;nginx.conf</span><br><span class="line">user  www;</span><br><span class="line">worker_processes  1;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">events &#123;</span><br><span class="line">    worker_connections  1024;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">http &#123;</span><br><span class="line">    include       mime.types;</span><br><span class="line">    default_type  application&#x2F;octet-stream;</span><br><span class="line"></span><br><span class="line">    log_format  main  &#39;$remote_addr - $remote_user [$time_local] &quot;$request&quot; &#39;</span><br><span class="line">                      &#39;$status $body_bytes_sent &quot;$http_referer&quot; &#39;</span><br><span class="line">                      &#39;&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;&#39;;</span><br><span class="line">    access_log  logs&#x2F;access.log  main;</span><br><span class="line"></span><br><span class="line">    sendfile        on;</span><br><span class="line">    tcp_nopush     on;</span><br><span class="line">    keepalive_timeout  65;</span><br><span class="line"></span><br><span class="line">    gzip  on;</span><br><span class="line"></span><br><span class="line">    server &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        listen       80;</span><br><span class="line">        server_name  nginx.i4t.com;</span><br><span class="line"></span><br><span class="line">        location &#x2F; &#123;</span><br><span class="line">           proxy_pass http:&#x2F;&#x2F;abcdocker;</span><br><span class="line">           proxy_set_header   Host             $host;</span><br><span class="line">           proxy_set_header   X-Real-IP        $remote_addr;</span><br><span class="line">           proxy_set_header  X-Forwarded-For  $proxy_add_x_forwarded_for;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    upstream abcdocker &#123;</span><br><span class="line">       server 10.4.82.140:8080;</span><br><span class="line">       server 127.0.0.1:8080;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#proxy_pass 代理节点，可以用ip+端口</span><br><span class="line">#upstream 后面写名称</span><br><span class="line">#server 后端节点名称</span><br></pre></td></tr></table></figure>
+
+<p>访问验证，我们访问nginx.i4t.com域名打开的是tomcat后端节点</p>
+<p><img src="http://static.zybuluo.com/abcdocker/y1nhqvcp1zf532g7w5josuqx/333.png" alt="333.png-334.7kB"></p>
+<blockquote>
+<p><strong>请注意缓存（google浏览器缓存不是很好清理）</strong></p>
+</blockquote>
+
+          
+            <br>
+            
+  
+    
+    
+
+<section class="widget copyright  desktop mobile">
+  <div class='content'>
+    
+      <blockquote>
+        
+          
+            <p>博客内容遵循 署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</p>
+
+          
+        
+          
+            <p>本文永久链接是：<a href=https://dreamer1103.github.io/2019/12/25/Nginx%20%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E4%B8%8E%E6%AD%A3%E5%90%91%E4%BB%A3%E7%90%86/>https://dreamer1103.github.io/2019/12/25/Nginx%20%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E4%B8%8E%E6%AD%A3%E5%90%91%E4%BB%A3%E7%90%86/</a></p>
+          
+        
+      </blockquote>
+    
+  </div>
+</section>
+
+  
+
+  
+    
+    
+
+<section class="widget qrcode  desktop mobile">
+  
+
+  <div class='content article-entry'>
+    
+      
+        <fancybox><img src='https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/qrcode/wiki_volantis.png'
+        
+          height='64px'
+        ></fancybox>
+      
+    
+      
+        <fancybox><img src='https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/qrcode/wiki_volantis.png'
+        
+          height='64px'
+        ></fancybox>
+      
+    
+  </div>
+</section>
+
+  
+
+
+          
+        </div>
+        
+          
+
+
+  <section class='meta' id="footer-meta">
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-03-06T14:36:31+08:00">
+  <a class='notlink'>
+    <i class="fas fa-save" aria-hidden="true"></i>
+    <p>更新于：2020年3月6日</p>
+  </a>
+</div>
+
+        
+      
+        
+          
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/nginx/" rel="nofollow"><i class="fas fa-hashtag" aria-hidden="true"></i><p>nginx</p></a></div>
+
+
+        
+      
+        
+          
+
+        
+      
+        
+          
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
+    
+      
+        <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer"
+          
+          href="http://connect.qq.com/widget/shareqq/index.html?url=https://dreamer1103.github.io/2019/12/25/Nginx%20%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E4%B8%8E%E6%AD%A3%E5%90%91%E4%BB%A3%E7%90%86/&title=Nginx反向代理与正向代理 - DREAMER&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/qq.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer"
+          
+          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://dreamer1103.github.io/2019/12/25/Nginx%20%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E4%B8%8E%E6%AD%A3%E5%90%91%E4%BB%A3%E7%90%86/&title=Nginx反向代理与正向代理 - DREAMER&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/qzone.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer"
+          
+          href="http://service.weibo.com/share/share.php?url=https://dreamer1103.github.io/2019/12/25/Nginx%20%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E4%B8%8E%E6%AD%A3%E5%90%91%E4%BB%A3%E7%90%86/&title=Nginx反向代理与正向代理 - DREAMER&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/weibo.png">
+          
+        </a>
+      
+    
+  </div>
+</div>
+
+
+
+        
+      
+    </div>
+  </section>
+
+
+        
+        
+          <div class="prev-next">
+            
+              <a class='prev' href='/2019/12/31/2019%E5%B9%B4%E6%80%BB%E7%BB%93/'>
+                <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>2019年总结</p>
+                <p class='content'>
+
+
+前言扯🥚终于考完试了（昨天下午终结了最后一科-“万恶”的复变函数🎈🎉），可以摩擦下年终总结了，花点时间想下2019年我干了什么🎁。完了写不下去了（此时中午12点59分30秒。
+忆往...</p>
+              </a>
+            
+            
+              <a class='next' href='/2019/11/28/heart/'>
+                <p class='title'>❤Thanksgiving❤<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+                <p class='content'>
+</p>
+              </a>
+            
+          </div>
+        
+      </section>
+    </article>
+  
+
+  
+    <!-- 显示推荐文章和评论 -->
+
+
+
+  <article class="post white-box comments shadow">
+    <section class="article typo">
+      <p ct><i class='fas fa-comments'></i> 评论</p>
+      
+      
+      
+      
+      
+        <section id="comments">
+          <div id="valine_container" class="valine_thread">
+            <i class="fas fa-spinner fa-spin fa-fw"></i>
+          </div>
+        </section>
+      
+    </section>
+  </article>
+
+
+  
+
+
+
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+
+
+  <script>
+    window.subData = {
+      title: 'Nginx反向代理与正向代理',
+      tools: true
+    }
+  </script>
+
+
+</div>
+<aside class='l_side'>
+  
+  
+    
+    
+
+<section class="widget qrcode shadow desktop">
+  
+  <header>
+    
+      <i class="fas fa-mobile fa-fw" aria-hidden="true"></i><span class='name'>手机观看</span>
+    
+  </header>
+
+
+  <div class='content article-entry'>
+    
+      
+        <img src='https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/qrcode/wiki_volantis.png'
+        >
+      
+    
+  </div>
+</section>
+
+  
+
+  
+    
+    
+
+
+  <section class="widget toc-wrapper shadow desktop mobile">
+    
+  <header>
+    
+      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>本文目录</span>
+    
+  </header>
+
+
+    <div class='content'>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、正向代理"><span class="toc-text">一、正向代理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、反向代理"><span class="toc-text">二、反向代理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、正向代理配置测试"><span class="toc-text">三、正向代理配置测试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四、反向代理配置测试"><span class="toc-text">四、反向代理配置测试</span></a>
+    </div>
+  </section>
+
+
+  
+
+
+</aside>
+
+
+  
+  <footer class="clearfix ">
+    <br><br>
+    
+      
+        <div class="aplayer-container">
+          
+
+  
+    <meting-js
+      theme='#1BCDFC'
+      autoplay='false'
+      volume='0.7'
+      loop='all'
+      order='list'
+      fixed='false'
+      list-max-height='340px'
+      server='netease'
+      type='playlist'
+      id='3175833810'
+      list-folded='true'>
+    </meting-js>
+  
+
+
+        </div>
+      
+    
+      
+        <br>
+        <div class="social-wrapper">
+          
+            
+              <a href="/atom.xml"
+                class="social fas fa-rss flat-btn"
+                target="_blank"
+                rel="external nofollow noopener noreferrer">
+              </a>
+            
+          
+            
+              <a href="mailto:me@xaoxuu.com"
+                class="social fas fa-envelope flat-btn"
+                target="_blank"
+                rel="external nofollow noopener noreferrer">
+              </a>
+            
+          
+            
+              <a href="https://github.com/xaoxuu"
+                class="social fab fa-github flat-btn"
+                target="_blank"
+                rel="external nofollow noopener noreferrer">
+              </a>
+            
+          
+            
+              <a href="https://music.163.com/#/user/home?id=63035382"
+                class="social fas fa-headphones-alt flat-btn"
+                target="_blank"
+                rel="external nofollow noopener noreferrer">
+              </a>
+            
+          
+        </div>
+      
+    
+      
+        <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+</div>
+      
+    
+      
+        本站使用
+        <a href="https://www.dreamer1103.tk/" target="_blank" class="codename">Dreamer</a>
+        作为主题
+        
+          ，
+          总访问量为
+          <span id="busuanzi_value_site_pv"><i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span>
+          次
+        
+      
+    
+      
+        <div class='copyright'>
+        <p><a href="https://xaoxuu.com" target="_blank" rel="noopener">Copyright © 2017-2020 Mr. X</a></p>
+
+        </div>
+      
+    
+  </footer>
+
+<script>setLoadingBarProgress(80);</script>
+
+
+      <script>setLoadingBarProgress(60);</script>
+    </div>
+    <a class="s-top fas fa-arrow-up fa-fw" href='javascript:void(0)'></a>
+  </div>
+  
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.3/dist/jquery.min.js"></script>
+
+
+  <script>
+    
+    var SEARCH_SERVICE = "hexo" || "hexo";
+    var ROOT = "/" || "/";
+    if (!ROOT.endsWith('/')) ROOT += '/';
+  </script>
+
+
+  <script async src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2/js/instant_page.js" type="module" defer integrity="sha384-OeDn4XE77tdHo8pGtE1apMPmAipjoxUQ++eeJa6EtJCfHlvijigWiJpD7VDPWXV1"></script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.js" async></script>
+
+  <script type="text/javascript">
+    $(function() {
+      Waves.attach('.flat-btn', ['waves-button']);
+      Waves.attach('.float-btn', ['waves-button', 'waves-float']);
+      Waves.attach('.float-btn-light', ['waves-button', 'waves-float', 'waves-light']);
+      Waves.attach('.flat-box', ['waves-block']);
+      Waves.attach('.float-box', ['waves-block', 'waves-float']);
+      Waves.attach('.waves-image');
+      Waves.init();
+    });
+  </script>
+
+
+  <script async src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-busuanzi@2.3/js/busuanzi.pure.mini.js"></script>
+
+
+
+  
+  
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/jquery-backstretch@2.1.18/jquery.backstretch.min.js"></script>
+
+    <script type="text/javascript">
+      $(function(){
+        var imgs=["https://cdn.jsdelivr.net/gh/xaoxuu/cdn-wallpaper/abstract/41F215B9-261F-48B4-80B5-4E86E165259E.jpeg"];
+        if ('true' == 'true') {
+          function shuffle(arr){
+            /*From countercurrent-time*/
+            var n = arr.length;
+            while(n--) {
+              var index = Math.floor(Math.random() * n);
+              var temp = arr[index];
+              arr[index] = arr[n];
+              arr[n] = temp;
+            }
+          }
+          shuffle(imgs);
+        }
+        if ('.cover') {
+          $('.cover').backstretch(
+            imgs,
+          {
+            duration: "20000",
+            fade: "1500"
+          });
+        } else {
+          $.backstretch(
+            imgs,
+          {
+            duration: "20000",
+            fade: "1500"
+          });
+        }
+      });
+    </script>
+  
+
+
+
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/aplayer@1.10/dist/APlayer.min.js" async></script>
+
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/meting@2.0/dist/Meting.min.js" async></script>
+
+  
+
+
+
+
+
+
+
+
+  
+    
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2.0/js/valine.js"></script>
+
+  
+  <script>
+  var GUEST_INFO = ['nick','mail','link'];
+  var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+    return GUEST_INFO.indexOf(item) > -1
+  });
+  var notify = 'true' == true;
+  var verify = 'true' == true;
+  var valine = new Valine();
+  valine.init({
+    el: '#valine_container',
+    notify: notify,
+    verify: verify,
+    guest_info: guest_info,
+    
+    appId: "yRrWxdm60ya2scYz7h6mjamr-gzGzoHsz",
+    appKey: "9s7yETi1nLzx2hQ0OhE6508X",
+    placeholder: "快来评论吧~",
+    pageSize:'10',
+    avatar:'mp',
+    lang:'zh-cn',
+    visitor: 'false',
+    highlight:'true'
+  })
+  </script>
+
+
+
+  
+<script src="/js/app.js"></script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2.1/js/search.js"></script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2/js/comment_typing.js"></script>
+
+
+
+<!-- 复制 -->
+
+  <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  /*页面载入完成后，创建复制按钮*/
+  !function (e, t, a) {
+    /* code */
+    function on_success(){
+      let $btn = $('.highlight .code pre');
+      console.log($btn);
+    }
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="fas fa-copy"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copyed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('fa-copy');
+        $icon.addClass('fa-clipboard-check');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPYED';
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('fa-copy');
+        $icon.addClass('fa-exclamation-triangle');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+
+
+<!-- fancybox -->
+
+  <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script>
+  let LAZY_LOAD_IMAGE = "";
+  $(".article-entry").find("fancybox").find("img").each(function () {
+      var element = document.createElement("a");
+      $(element).attr("data-fancybox", "gallery");
+      $(element).attr("href", $(this).attr("src"));
+      /* 图片采用懒加载处理时,
+       * 一般图片标签内会有个属性名来存放图片的真实地址，比如 data-original,
+       * 那么此处将原本的属性名src替换为对应属性名data-original,
+       * 修改如下
+       */
+       if (LAZY_LOAD_IMAGE) {
+         $(element).attr("href", $(this).attr("data-original"));
+       }
+      $(this).wrap(element);
+  });
+</script>
+
+
+
+
+
+
+  <script>setLoadingBarProgress(100);</script>
+</body>
+</html>
